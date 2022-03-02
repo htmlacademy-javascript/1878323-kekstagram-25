@@ -18,6 +18,28 @@ const COMMENTS = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
+const DESCRIPTION = [
+  'Удачный кадр',
+  'Одно из лучших фото',
+  'Фотографии в высоком качестве'
+];
+
+const MAX_POST_ID = 25;
+const MIN_AVATAR_ID = 1;
+const MAX_AVATAR_ID = 6;
+const MIN_COMMENTS_ID = 1;
+const MAX_COMMENTS_ID = 5;
+const MIN_LIKES_ID = 15;
+const MAX_LIKES_ID = 200;
+
+let createIdGenerator = () => {
+  let lastGeneratedId = 0;
+  return () => lastGeneratedId++;
+};
+
+let commentId = 1;
+let postId = 1;
+
 //Функция, возвращающая случайное целое число из переданного диапазона включительно
 const getRandomPositiveInteger = (a, b) => {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
@@ -31,32 +53,21 @@ const checkStringLength = (string, length) => (string.length <= length);
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-const createPostComments = (numberComments,numberPost) => {
-  const arr = [];
-  for (let i = 1; i <= numberComments; i++) {
-    arr.push ({
-      id: numberPost*100+i,
-      avatar: `img/avatar-${getRandomPositiveInteger(1,6)}.svg`,
-      message: getRandomArrayElement (COMMENTS),
-      name: getRandomArrayElement (NAMES),
-    });
-  }
-  return arr;
-};
+const createPostsComments = () => ({
+  id: commentId++,
+  avatar: `img/avatar-${getRandomPositiveInteger(MIN_AVATAR_ID, MAX_AVATAR_ID)}.svg`,
+  message: getRandomArrayElement(COMMENTS),
+  name: getRandomArrayElement(NAMES),
+});
 
-const createPosts = () => {
-  const arr = [];
-  for (let i = 1; i <= 1; i++) {
-    arr.push ({
-      id: i,
-      url: `photos/${i}.jpg`,
-      description: '',
-      likes: getRandomPositiveInteger(15,200),
-      comments: createPostComments(getRandomPositiveInteger(4,5),i),
-    });
-  }
-  return arr;
-};
+const createPosts = () => ({
+  id: postId,
+  url: `photos/${postId++}.jpg`,
+  description: getRandomArrayElement(DESCRIPTION),
+  likes: getRandomPositiveInteger(MIN_LIKES_ID, MAX_LIKES_ID),
+  comments: Array.from({length: getRandomPositiveInteger(MIN_COMMENTS_ID, MAX_COMMENTS_ID)}, createPostsComments),
+});
 
-checkStringLength();
-createPosts();
+const similarPosts = () => Array.from({length: MAX_POST_ID}, createPosts);
+
+console.log(similarPosts());

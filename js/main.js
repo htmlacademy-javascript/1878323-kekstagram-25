@@ -25,7 +25,8 @@ const DESCRIPTION = [
 ];
 
 const MAX_POST_ID = 25;
-let commentId = 0;
+let commentId = 1;
+let postId = 1;
 
 //Функция, возвращающая случайное целое число из переданного диапазона включительно
 const getRandomPositiveInteger = (a, b) => {
@@ -40,31 +41,21 @@ const checkStringLength = (string, length) => (string.length <= length);
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-const createPostsComments = (numberComments) => {
-  const arr = [];
-  for (let i = 1; i <= numberComments; i++) {
-    arr.push ({
-      id: commentId++,
-      avatar: `img/avatar-${getRandomPositiveInteger(1,6)}.svg`,
-      message: getRandomArrayElement (COMMENTS),
-      name: getRandomArrayElement (NAMES),
-    });
-  }
-  return arr;
-};
+const createPostsComments = () => ({
+  id: commentId++,
+  avatar: `img/avatar-${getRandomPositiveInteger(1,6)}.svg`,
+  message: getRandomArrayElement (COMMENTS),
+  name: getRandomArrayElement (NAMES),
+});
 
-const createPosts = () => {
-  const arr = [];
-  for (let i = 1; i <= MAX_POST_ID; i++) {
-    arr.push ({
-      id: i,
-      url: `photos/${i}.jpg`,
-      description: getRandomArrayElement (DESCRIPTION),
-      likes: getRandomPositiveInteger(15,200),
-      comments: JSON.stringify(createPostsComments(getRandomPositiveInteger(1,5))),
-    });
-  }
-  return arr;
-};
+const createPosts = () => ({
+  id: postId,
+  url: `photos/${postId++}.jpg`,
+  description: getRandomArrayElement (DESCRIPTION),
+  likes: getRandomPositiveInteger(15,200),
+  comments: Array.from({length: getRandomPositiveInteger(1,5)},createPostsComments),
+});
 
-console.log(createPosts());
+const similarPosts = Array.from({length: MAX_POST_ID},createPosts);
+
+console.log(similarPosts);

@@ -46,13 +46,13 @@ const createPostComments = (numberComments,numberPost) => {
 
 const createPosts = () => {
   const arr = [];
-  for (let i = 1; i <= 1; i++) {
+  for (let i = 1; i <= 25; i++) {
     arr.push ({
       id: i,
       url: `photos/${i}.jpg`,
       description: '',
       likes: getRandomPositiveInteger(15,200),
-      comments: createPostComments(getRandomPositiveInteger(4,5),i),
+      comments: createPostComments(getRandomPositiveInteger(1,5),i),
     });
   }
   return arr;

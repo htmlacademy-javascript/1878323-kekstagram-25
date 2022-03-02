@@ -18,6 +18,15 @@ const COMMENTS = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
+const DESCRIPTION = [
+  'Удачный кадр',
+  'Одно из лучших фото',
+  'Фотографии в высоком качестве'
+];
+
+const MAX_POST_ID = 25;
+let commentId = 0;
+
 //Функция, возвращающая случайное целое число из переданного диапазона включительно
 const getRandomPositiveInteger = (a, b) => {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
@@ -31,11 +40,11 @@ const checkStringLength = (string, length) => (string.length <= length);
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-const createPostComments = (numberComments,numberPost) => {
+const createPostsComments = (numberComments) => {
   const arr = [];
   for (let i = 1; i <= numberComments; i++) {
     arr.push ({
-      id: numberPost*100+i,
+      id: commentId++,
       avatar: `img/avatar-${getRandomPositiveInteger(1,6)}.svg`,
       message: getRandomArrayElement (COMMENTS),
       name: getRandomArrayElement (NAMES),
@@ -46,13 +55,13 @@ const createPostComments = (numberComments,numberPost) => {
 
 const createPosts = () => {
   const arr = [];
-  for (let i = 1; i <= 25; i++) {
+  for (let i = 1; i <= MAX_POST_ID; i++) {
     arr.push ({
       id: i,
       url: `photos/${i}.jpg`,
-      description: '',
+      description: getRandomArrayElement (DESCRIPTION),
       likes: getRandomPositiveInteger(15,200),
-      comments: createPostComments(getRandomPositiveInteger(1,5),i),
+      comments: JSON.stringify(createPostsComments(getRandomPositiveInteger(1,5))),
     });
   }
   return arr;

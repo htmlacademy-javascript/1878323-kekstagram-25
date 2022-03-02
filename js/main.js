@@ -58,5 +58,4 @@ const createPosts = () => {
   return arr;
 };
 
-checkStringLength();
-createPosts();
+console.log(createPosts());

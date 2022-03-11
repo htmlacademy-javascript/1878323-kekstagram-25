@@ -14,4 +14,6 @@ itemPhotosDescriptions.forEach((picture) => {
   pictureListFragment.append(copyItemPicture);
 });
 
-pictureList.append(pictureListFragment);
+const addPictureList = () => pictureList.append(pictureListFragment);
+
+export {addPictureList};

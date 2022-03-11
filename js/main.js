@@ -1,1 +1,3 @@
-import './picture.js';
+import {addPictureList} from './picture.js';
+
+addPictureList();

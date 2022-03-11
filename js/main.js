@@ -1,3 +1,4 @@
-import {addPictureList} from './picture.js';
+import {createPictureListArray} from './picture.js';
+const pictureList = document.querySelector('.pictures');
 
-addPictureList();
+pictureList.append(createPictureListArray());

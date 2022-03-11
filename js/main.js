@@ -4,11 +4,11 @@ const pictureList = document.querySelector('.pictures');
 const itemPictureDescriptions = createPosts();
 const pictureListFragment = document.createDocumentFragment();
 
-const createPictureList = () => {
+const createPictureListArray = () => {
   itemPictureDescriptions.forEach((picture) => {
     pictureListFragment.append(createItemPicture(picture));
   });
   return pictureListFragment;
 };
 
-pictureList.append(createPictureList());
+pictureList.append(createPictureListArray());

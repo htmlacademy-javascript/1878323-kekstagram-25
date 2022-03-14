@@ -1,3 +1,4 @@
+// import  './big-picture.js';
 import {createItemPicture} from './picture.js';
 import {createPosts} from './data.js';
 
@@ -11,5 +12,7 @@ const createPictureList = () => {
   });
   return pictureListFragment;
 };
+
+
 
 pictureList.append(createPictureList());

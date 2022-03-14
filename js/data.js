@@ -11,7 +11,7 @@ const MAX_LIKES_ID = 200;
 
 const createAvatarUrl = () => {
   const avatarId = getRandomPositiveInteger(MIN_AVATAR_ID, MAX_AVATAR_ID);
-  return `img/avatar-${avatarId}.jpg`;
+  return `img/avatar-${avatarId}.svg`;
 };
 
 const createPostsComments = (id) => ({

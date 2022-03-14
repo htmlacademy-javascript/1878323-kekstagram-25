@@ -22,7 +22,6 @@ picturesList.append(createPictureList());
 picturesList.querySelectorAll('.picture').forEach(( item, i ) => {
 
   item.addEventListener( 'click', () => {
-    console.log(postsList[i]);
     openPictureModal(postsList[i]);
   });
 
@@ -42,8 +41,3 @@ cancel.addEventListener('keydown', (evt) => {
     closePictureModal();
   }
 });
-
-// console.log( item, i, e );
-// // item - ссылка на елемент
-// // i - порядочный номер элемента (начиная с 0)
-// // e - объект ивента

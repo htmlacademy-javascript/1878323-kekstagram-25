@@ -11,8 +11,8 @@ const cancel = document.querySelector('.big-picture__cancel');
 const socialCommentCount = document.querySelector('.social__comment-count');
 const socialCommentsLoader = document.querySelector('.social__comments-loader');
 
-const COMMENTIMGWEIGHT = 35;
-const COMMENTIMGHEIGHT = 35;
+const COMMENT_IMAGE_WEIGHT = 35;
+const COMMENT_IMAGE_HEIGHT = 35;
 
 const fillBigPicture = (picture) => {
   likesCount.textContent = picture.likes;
@@ -31,8 +31,8 @@ const fillBigPicture = (picture) => {
 
     pictureCommentImg.src = commentID.avatar;
     pictureCommentImg.alt = commentID.name;
-    pictureCommentImg.width = COMMENTIMGWEIGHT;
-    pictureCommentImg.height= COMMENTIMGHEIGHT;
+    pictureCommentImg.width = COMMENT_IMAGE_WEIGHT;
+    pictureCommentImg.height= COMMENT_IMAGE_HEIGHT;
     pictureCommentText.classList.add('social__text');
 
     pictureCommentText.textContent = commentID.message;
@@ -50,7 +50,7 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
-const tooglePictureModel = (booleanValue) => {
+const tooglePictureModal = (booleanValue) => {
   toggleClass(bigPicture,'hidden',!booleanValue);
   toggleClass(socialCommentCount,'hidden',booleanValue);
   toggleClass(socialCommentsLoader,'hidden',booleanValue);
@@ -59,13 +59,13 @@ const tooglePictureModel = (booleanValue) => {
 };
 
 const openPictureModal = (picture) => {
-  tooglePictureModel (true);
+  tooglePictureModal (true);
   fillBigPicture(picture);
   document.addEventListener('keydown', onPopupEscKeydown);
 };
 
 const closePictureModal = () => {
-  tooglePictureModel (false);
+  tooglePictureModal (false);
   document.removeEventListener('keydown', onPopupEscKeydown);
 };
 

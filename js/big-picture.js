@@ -50,22 +50,22 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
-const tooglePictureModal = (booleanValue) => {
-  toggleClass(bigPicture,'hidden',!booleanValue);
-  toggleClass(socialCommentCount,'hidden',booleanValue);
-  toggleClass(socialCommentsLoader,'hidden',booleanValue);
-  toggleClass(body,'modal-open',booleanValue);
+const tooglePictureModal = (isHidden) => {
+  toggleClass(bigPicture,'hidden', !isHidden);
+  toggleClass(socialCommentCount,'hidden', isHidden);
+  toggleClass(socialCommentsLoader,'hidden', isHidden);
+  toggleClass(body,'modal-open', isHidden);
   socialComments.innerHTML = '';
 };
 
 const openPictureModal = (picture) => {
-  tooglePictureModal (true);
+  tooglePictureModal(true);
   fillBigPicture(picture);
   document.addEventListener('keydown', onPopupEscKeydown);
 };
 
 const closePictureModal = () => {
-  tooglePictureModal (false);
+  tooglePictureModal(false);
   document.removeEventListener('keydown', onPopupEscKeydown);
 };
 

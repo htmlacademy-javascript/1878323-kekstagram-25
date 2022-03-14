@@ -6,6 +6,7 @@ const createItemPicture = (picture) => {
   copyItemPicture.querySelector('img').src = picture.url;
   copyItemPicture.querySelector('.picture__likes').textContent = picture.likes;
   copyItemPicture.querySelector('.picture__comments').textContent = picture.comments.length;
+
   return copyItemPicture;
 };
 

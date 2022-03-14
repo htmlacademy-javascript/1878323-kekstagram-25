@@ -25,19 +25,8 @@ picturesList.querySelectorAll('.picture').forEach(( item, i ) => {
     openPictureModal(postsList[i]);
   });
 
-  item.addEventListener('keydown', (evt) => {
-    if (isEnterKey(evt)) {
-      openPictureModal(postsList[i]);
-    }
-  });
 });
 
 cancel.addEventListener('click', () => {
   closePictureModal();
-});
-
-cancel.addEventListener('keydown', (evt) => {
-  if (isEnterKey(evt)) {
-    closePictureModal();
-  }
 });

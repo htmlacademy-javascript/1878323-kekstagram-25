@@ -1,4 +1,4 @@
-import {isEscapeKey} from './utils.js';
+import {isEscapeKey, toggleClass} from './utils.js';
 const body = document.querySelector('body');
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImg = bigPicture.querySelector('.big-picture__img');
@@ -6,10 +6,13 @@ const likesCount = bigPicture.querySelector('.likes-count');
 const commentsCountText = bigPicture.querySelector('.comments-count');
 const socialCaption = bigPicture.querySelector('.social__caption');
 const socialComments = bigPicture.querySelector('.social__comments');
-
+const cancel = document.querySelector('.big-picture__cancel');
 
 const socialCommentCount = document.querySelector('.social__comment-count');
 const socialCommentsLoader = document.querySelector('.social__comments-loader');
+
+const COMMENTIMGWEIGHT = 35;
+const COMMENTIMGHEIGHT = 35;
 
 const fillBigPicture = (picture) => {
   likesCount.textContent = picture.likes;
@@ -28,8 +31,8 @@ const fillBigPicture = (picture) => {
 
     pictureCommentImg.src = commentID.avatar;
     pictureCommentImg.alt = commentID.name;
-    pictureCommentImg.width = 35;
-    pictureCommentImg.height= 35;
+    pictureCommentImg.width = COMMENTIMGWEIGHT;
+    pictureCommentImg.height= COMMENTIMGHEIGHT;
     pictureCommentText.classList.add('social__text');
 
     pictureCommentText.textContent = commentID.message;
@@ -47,24 +50,27 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
-const openPictureModal = (picture) => {
-  bigPicture.classList.remove('hidden');
+const tooglePictureModel = (booleanValue) => {
+  toggleClass(bigPicture,'hidden',!booleanValue);
+  toggleClass(socialCommentCount,'hidden',booleanValue);
+  toggleClass(socialCommentsLoader,'hidden',booleanValue);
+  toggleClass(body,'modal-open',booleanValue);
   socialComments.innerHTML = '';
-  socialCommentCount.classList.add('hidden');
-  socialCommentsLoader.classList.add('hidden');
-  body.classList.add('modal-open');
-  fillBigPicture(picture);
+};
 
+const openPictureModal = (picture) => {
+  tooglePictureModel (true);
+  fillBigPicture(picture);
   document.addEventListener('keydown', onPopupEscKeydown);
 };
 
 const closePictureModal = () => {
-  bigPicture.classList.add('hidden');
-  socialComments.innerHTML = '';
-  socialCommentCount.classList.remove('hidden');
-  socialCommentsLoader.classList.remove('hidden');
-  body.classList.remove('modal-open');
+  tooglePictureModel (false);
   document.removeEventListener('keydown', onPopupEscKeydown);
 };
+
+cancel.addEventListener('click', () => {
+  closePictureModal();
+});
 
 export {fillBigPicture, openPictureModal, closePictureModal};

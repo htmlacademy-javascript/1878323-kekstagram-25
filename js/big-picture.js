@@ -1,4 +1,5 @@
 import {isEscapeKey, toggleClass} from './utils.js';
+
 const body = document.querySelector('body');
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImg = bigPicture.querySelector('.big-picture__img');
@@ -14,33 +15,24 @@ const socialCommentsLoader = document.querySelector('.social__comments-loader');
 const COMMENT_IMAGE_WEIGHT = 35;
 const COMMENT_IMAGE_HEIGHT = 35;
 
+const fillBigPictureComments = (comments) => {
+  let commentsHtml = '';
+  comments.forEach((commentId) => {
+    commentsHtml += `<li class="social__comment">
+      <img class="social__picture" src="${commentId.avatar}" alt="${commentId.name}" width="${COMMENT_IMAGE_WEIGHT}" height="${COMMENT_IMAGE_HEIGHT}">
+      <p class="social__text">${commentId.message}</p>
+      </li>`;
+  });
+  socialComments.innerHTML = commentsHtml;
+};
+
 const fillBigPicture = (picture) => {
   likesCount.textContent = picture.likes;
   bigPictureImg.querySelector('img').src = picture.url;
   commentsCountText.textContent = picture.comments.length;
   socialCaption.textContent = picture.description;
+  fillBigPictureComments (picture.comments);
 
-  picture.comments.forEach((commentID) => {
-
-    const pictureCommentsList = document.createElement('li');
-    const pictureCommentImg = document.createElement('img');
-    const pictureCommentText = document.createElement('p');
-
-    pictureCommentsList.classList.add('social__comment');
-    pictureCommentImg.classList.add('social__picture');
-
-    pictureCommentImg.src = commentID.avatar;
-    pictureCommentImg.alt = commentID.name;
-    pictureCommentImg.width = COMMENT_IMAGE_WEIGHT;
-    pictureCommentImg.height= COMMENT_IMAGE_HEIGHT;
-    pictureCommentText.classList.add('social__text');
-
-    pictureCommentText.textContent = commentID.message;
-    pictureCommentsList.append(pictureCommentImg);
-    pictureCommentsList.append(pictureCommentText);
-
-    socialComments.append(pictureCommentsList);
-  });
 };
 
 const onPopupEscKeydown = (evt) => {

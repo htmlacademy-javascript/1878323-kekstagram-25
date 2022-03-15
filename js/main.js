@@ -1,8 +1,6 @@
-import {/*isEscapeKey,*/ isEnterKey} from './utils.js';
 import {createPosts} from './data.js';
 import {createItemPicture} from './picture.js';
-import {openPictureModal, closePictureModal} from './big-picture.js';
-
+import {openPictureModal} from './big-picture.js';
 
 const postsList = createPosts();
 const picturesList = document.querySelector('.pictures');
@@ -17,13 +15,8 @@ const createPictureList = () => {
 
 picturesList.append(createPictureList());
 
-
 picturesList.querySelectorAll('.picture').forEach(( item, i ) => {
-
   item.addEventListener('click', () => {
     openPictureModal(postsList[i]);
   });
-
 });
-
-

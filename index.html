@@ -39,7 +39,7 @@
             </fieldset>
 
             <!-- Форма редактирования изображения -->
-            <div class="img-upload__overlay  ">
+            <div class="img-upload__overlay  hidden">
               <div class="img-upload__wrapper">
                 <div class="img-upload__preview-container">
 
@@ -114,6 +114,10 @@
                 </fieldset>
 
                 <!-- Добавление хэш-тегов и комментария к изображению -->
+<!--                <fieldset class="img-upload__text text">-->
+<!--                  <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег">-->
+<!--                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..."></textarea>-->
+<!--                </fieldset>-->
                 <fieldset class="img-upload__text text">
                   <label class="input-label" id="hashtags" aria-label="Хэш-теги к изображению">
                     <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег"
@@ -134,7 +138,6 @@
                               aria-labelledby="description"></textarea>
                   </label>
                 </fieldset>
-
                 <!-- Кнопка для отправки данных на сервер -->
                 <button type="submit" class="img-upload__submit" id="upload-submit">Опубликовать</button>
               </div>
@@ -247,6 +250,6 @@
   </template>
 
 </body>
-<!-- Подключение скриптов -->
+<script src="pristine/pristine.min.js"></script>
 <script type="module" src="js/main.js"></script>
 </html>

@@ -1,3 +1,4 @@
+import './upload-picture.js';
 import {createPosts} from './data.js';
 import {createItemPicture} from './picture.js';
 import {openPictureModal} from './big-picture.js';

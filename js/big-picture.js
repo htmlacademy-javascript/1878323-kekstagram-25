@@ -35,12 +35,12 @@ const fillBigPicture = (picture) => {
 
 };
 
-const onPopupEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closePictureModal();
-  }
-};
+// const onPopupEscKeydown = (evt) => {
+//   if (isEscapeKey(evt)) {
+//     evt.preventDefault();
+//     closePictureModal();
+//   }
+// };
 
 const tooglePictureModal = (isHidden) => {
   toggleClass(bigPicture,'hidden', !isHidden);
@@ -64,5 +64,13 @@ const closePictureModal = () => {
 cancel.addEventListener('click', () => {
   closePictureModal();
 });
+
+function onPopupEscKeydown(evt) {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closePictureModal();
+  }
+
+}
 
 export {fillBigPicture, openPictureModal, closePictureModal};

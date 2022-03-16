@@ -114,28 +114,12 @@
                 </fieldset>
 
                 <!-- Добавление хэш-тегов и комментария к изображению -->
-<!--                <fieldset class="img-upload__text text">-->
-<!--                  <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег">-->
-<!--                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..."></textarea>-->
-<!--                </fieldset>-->
                 <fieldset class="img-upload__text text">
-                  <label class="input-label" id="hashtags" aria-label="Хэш-теги к изображению">
-                    <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег"
-                           aria-labelledby="hashtags"
-                           data-pristine-hashtags-count
-                           data-pristine-hashtags-count-message="Не больше 5 тегов"
-                           data-pristine-hashtags-format
-                           data-pristine-hashtags-format-message="Неверный формат тега"
-                           data-pristine-hashtags-equal
-                           data-pristine-hashtags-equal-message="Теги должны быть разные"
-                    >
+                  <label class="text__label" id="hashtags" aria-label="Хэш-теги к изображению">
+                    <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег">
                   </label>
-                  <label class="input-label" aria-label="Комментарии к изображению">
-                    <textarea class="text__description" id="description" name="description"
-                              maxlength="140"
-                              data-pristine-maxlength-message="Не больше 140 символов..."
-                              placeholder="Ваш комментарий..."
-                              aria-labelledby="description"></textarea>
+                  <label class="text__label" aria-label="Комментарии к изображению">
+                    <textarea class="text__description" id="description" name="description" placeholder="Ваш комментарий..." maxlength="140"></textarea>
                   </label>
                 </fieldset>
                 <!-- Кнопка для отправки данных на сервер -->

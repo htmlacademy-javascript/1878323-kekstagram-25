@@ -70,7 +70,4 @@ const createPosts = () => (
   ))
 );
 
-// const getPost = (count) => Array.from({ length: count }, (v, k) => createPost(k+1));
-// const createPosts = () => getPost(PHOTOS_COUNT);
-
 export {createPosts};

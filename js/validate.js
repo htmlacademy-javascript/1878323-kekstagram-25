@@ -57,7 +57,7 @@ const validateTagsDuplicate = (value) => {
 };
 
 /**
- * Проверка на минимальную и максимальну длину хэштега.
+ * Проверка на минимальную и максимальную длину хэштега.
  */
 const validateTagLength = (value) => (
   splitHashtags(value).every((tag) => (tag.length >= HASHTAGS_MIN_SYMBOLS && tag.length <= HASHTAGS_MAX_SYMBOLS))
@@ -94,4 +94,8 @@ pristine.addValidator(hashtagsElement, validateTagLength, `Длина хэште
 pristine.addValidator(hashtagsElement, validateTagRegEx, 'Хештег должен состоять только из букв и цифр');
 pristine.addValidator(commentElement, validateDescriptionLength, `Максимальная длина комментария - ${DESCRIPTION_MAX_LENGTH} символов`);
 
-imageUploadForm.addEventListener('submit', (evt) => pristine.validate() ? true : evt.preventDefault());
+imageUploadForm.addEventListener('submit', (evt) => {
+  if(!pristine.validate()){
+    evt.preventDefault();
+  }
+});

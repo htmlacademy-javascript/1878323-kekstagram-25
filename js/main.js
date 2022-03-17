@@ -17,7 +17,7 @@ const createPictureList = () => {
 
 picturesList.append(createPictureList());
 
-picturesList.querySelectorAll('.picture').forEach(( item, i ) => {
+picturesList.querySelectorAll('.picture').forEach((item, i) => {
   item.addEventListener('click', () => {
     openPictureModal(postsList[i]);
   });

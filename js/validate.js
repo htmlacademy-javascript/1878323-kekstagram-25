@@ -94,7 +94,7 @@ pristine.addValidator(hashtagsElement, validateTagRegEx, 'Хештег долж�
 pristine.addValidator(commentElement, validateDescriptionLength, `Максимальная длина комментария - ${DESCRIPTION_MAX_LENGTH} символов`);
 
 imageUploadForm.addEventListener('submit', (evt) => {
-  if(!pristine.validate()){
+  if (!pristine.validate()) {
     evt.preventDefault();
   }
 });

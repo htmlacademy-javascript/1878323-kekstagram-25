@@ -64,7 +64,7 @@ const fillBigPicture = (picture) => {
   bigPictureImg.querySelector('img').src = picture.url;
   commentsCountText.textContent = picture.comments.length.toString();
   socialCaption.textContent = picture.description;
-  fillBigPictureComments (picture.comments);
+  fillBigPictureComments(picture.comments);
   loadMoreComment();
 
   const nowShowing = [...socialComments.children].filter((chapter) => !chapter.classList.contains('hidden')).length;
@@ -72,8 +72,8 @@ const fillBigPicture = (picture) => {
 };
 
 const tooglePictureModal = (isHidden) => {
-  toggleClass(pictureBig,'hidden', !isHidden);
-  toggleClass(bodyElement,'modal-open', isHidden);
+  toggleClass(pictureBig, 'hidden', !isHidden);
+  toggleClass(bodyElement, 'modal-open', isHidden);
   socialComments.innerHTML = '';
 };
 

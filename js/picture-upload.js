@@ -32,8 +32,8 @@ const uploadPicture = () => {
 pictureUploadButton.addEventListener('change', uploadPicture);
 
 const toogleUploadPictureModal = (isHidden) => {
-  toggleClass(bodyElement,'modal-open', isHidden);
-  toggleClass(pictureUploadModal,'hidden', !isHidden);
+  toggleClass(bodyElement, 'modal-open', isHidden);
+  toggleClass(pictureUploadModal, 'hidden', !isHidden);
 };
 
 /**

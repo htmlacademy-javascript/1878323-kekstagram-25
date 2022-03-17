@@ -5,7 +5,7 @@ const PHOTOS_COUNT = 25;
 const MIN_AVATAR_ID = 1;
 const MAX_AVATAR_ID = 6;
 const MIN_COMMENTS_ID = 1;
-const MAX_COMMENTS_ID = 5;
+const MAX_COMMENTS_ID = 20;
 const MIN_LIKES_ID = 15;
 const MAX_LIKES_ID = 200;
 
@@ -27,7 +27,7 @@ const getCommentsQuantity = () => getRandomPositiveInteger(MIN_COMMENTS_ID, MAX_
  * Используется глобальный счетчик ID, чтобы не было комментариев с одинаковым идентификатором.
  *
  * @param {number} id — счетчик ID комментария.
- * @return {array} — массив из комментариев-объектов.
+ * @returns {array} — массив из комментариев-объектов.
  */
 const createPostsComments = (id) => ({
   id,
@@ -39,7 +39,7 @@ const createPostsComments = (id) => ({
 /**
  * Создание массива из комментариев-объектов.
  *
- * @return {array} — массив из комментариев-объектов.
+ * @returns {array} — массив из комментариев-объектов.
  */
 const getCommentsData = () => Array.from({length: getCommentsQuantity()},(v, k) => createPostsComments(k));
 
@@ -47,7 +47,7 @@ const getCommentsData = () => Array.from({length: getCommentsQuantity()},(v, k) 
  * Заполнение одного элемента-объекта с данными для одной фотографии.
  *
  * @param {number} id — идентификатор фотографии из общего массива фотографий.
- * @return {object} — объект с данными для одной фотографии.
+ * @returns {object} — объект с данными для одной фотографии.
  */
 const createPost = (id) => ({
   id,
@@ -62,7 +62,7 @@ const photosRandomIdArray = shuffleArray(createArrayConsistentNumbers(1, PHOTOS_
 /**
  * Создание массива из описаний фотографий.
  *
- * @return {array} — массив из описаний фотографий.
+ * @returns {array} — массив из описаний фотографий.
  */
 const createPosts = () => (
   photosRandomIdArray.map((id) => (

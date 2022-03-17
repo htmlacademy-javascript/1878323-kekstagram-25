@@ -4,7 +4,7 @@
  *
  * @param {string} string — проверяемая строка.
  * @param {number} limit — лимит символов.
- * @return {boolean} — результат проверки превышения лимита (true - лимит не превышен/ false - лимит превышен).
+ * @returns {boolean} — результат проверки превышения лимита (true - лимит не превышен/ false - лимит превышен).
  */
 const isStringNotOverLimit = (string, limit = 140) => (
   string.trim().length <= limit
@@ -16,7 +16,7 @@ const isStringNotOverLimit = (string, limit = 140) => (
  *
  * @param {number} min — нижняя граница диапазона.
  * @param {number} max — верхняя граница диапазона.
- * @return {number} — полученное случайное целое из диапазона.
+ * @returns {number} — полученное случайное целое из диапазона.
  */
 const getRandomPositiveInteger = (min, max) => {
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
@@ -30,7 +30,7 @@ const getRandomPositiveInteger = (min, max) => {
  *
  * @param {number} start — стартовое число диапазона.
  * @param {number} finish — конечное число диапазона.
- * @return {array} — итоговый массив последовательных чисел.
+ * @returns {array} — итоговый массив последовательных чисел.
  */
 const createArrayConsistentNumbers = (start, finish) => {
   const array = [];
@@ -44,7 +44,7 @@ const createArrayConsistentNumbers = (start, finish) => {
  * Перемешивание элементов массива в случайном порядке.
  *
  * @param {array} array — исходный массив.
- * @return {array} — итоговый массив.
+ * @returns {array} — итоговый массив.
  */
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -60,7 +60,7 @@ const shuffleArray = (array) => {
  * Получение случайного элемента массива.
  *
  * @param {array} array — исходный массив.
- * @return {string|number|object} — значение массива со случайным индексом.
+ * @returns {string|number|object} — значение массива со случайным индексом.
  */
 const getRandomArrayElement = (array) => array[getRandomPositiveInteger(0, array.length - 1)];
 
@@ -71,7 +71,7 @@ const getRandomArrayElement = (array) => array[getRandomPositiveInteger(0, array
  * @param {array} array — исходный массив.
  * @param {number} min — нижняя граница диапазона.
  * @param {number} max — верхняя граница диапазона.
- * @return {array} — итоговый массив.
+ * @returns {array} — итоговый массив.
  */
 const getRandomCountArrayElements = (array, min = 1, max = array.length) => (
   shuffleArray(array).slice(0, getRandomPositiveInteger(min, max))

@@ -669,6 +669,12 @@ main {
   border: none;
 }
 
+.text__label {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
 .text__hashtags {
   width: 450px;
 

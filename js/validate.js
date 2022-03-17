@@ -3,7 +3,6 @@ import {stopEscPropagation} from './utils.js';
 const imageUploadForm = document.querySelector('.img-upload__form');
 const hashtagsElement = imageUploadForm.querySelector('.text__hashtags');
 const commentElement = imageUploadForm.querySelector('.text__description');
-const imageUploadButton = document.querySelector('.img-upload__submit');
 
 const HASHTAGS_MAX_COUNT = 5;
 const HASHTAGS_MIN_SYMBOLS = 2;

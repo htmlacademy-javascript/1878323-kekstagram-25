@@ -83,8 +83,6 @@ const openPictureModal = (picture) => {
   totalCommentList = picture.comments;
   totalCommentListLength = totalCommentList.length;
   tooglePictureModal(true);
-  totalCommentList = picture.comments;
-  totalCommentListLength = totalCommentList.length;
   fillBigPicture(picture);
   window.addEventListener('keydown', closePictureModal);
   cancelButton.addEventListener('click', closePictureModal);

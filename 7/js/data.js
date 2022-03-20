@@ -1,4 +1,4 @@
-import {getRandomArrayElement, getRandomPositiveInteger, shuffleArray, createArrayConsistentNumbers} from './utils.js';
+import {createArrayConsistentNumbers, getRandomArrayElement, getRandomPositiveInteger, shuffleArray} from './utils.js';
 import {COMMENTS, DESCRIPTION, NAMES} from './constants.js';
 
 const PHOTOS_COUNT = 25;
@@ -41,7 +41,7 @@ const createPostsComments = (id) => ({
  *
  * @returns {array} — массив из комментариев-объектов.
  */
-const getCommentsData = () => Array.from({length: getCommentsQuantity()},(v, k) => createPostsComments(k));
+const getCommentsData = () => Array.from({length: getCommentsQuantity()}, (v, k) => createPostsComments(k));
 
 /**
  * Заполнение одного элемента-объекта с данными для одной фотографии.
@@ -69,8 +69,5 @@ const createPosts = () => (
     createPost(id)
   ))
 );
-
-// const getPost = (count) => Array.from({ length: count }, (v, k) => createPost(k+1));
-// const createPosts = () => getPost(PHOTOS_COUNT);
 
 export {createPosts};

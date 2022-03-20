@@ -98,6 +98,10 @@ const stopEscPropagation = (evt) => {
 
 /**
  * Переключение классов на закрытие и открытие вплывающих окон c помощью toggle.
+ *
+ * @param {array} el — DOM элемент.
+ * @param {text} className — наименование класса.
+ * @param {boolean} isHidden — true или false.
  */
 const toggleClass = (el, className, isHidden) => el.classList.toggle(className, isHidden);
 

@@ -672,7 +672,17 @@ main {
 .text__label {
   display: flex;
   flex-direction: column;
-  padding: 10px 0;
+}
+
+.text__label--error{
+  display: block;
+  margin: -20px auto 0;
+  width: 450px;
+  text-transform: lowercase;
+  font-size: 0.85em;
+  background-color: #cc0000;
+  color: #ffffff;
+  border-radius: 5px;
 }
 
 .text__hashtags {

@@ -1,4 +1,5 @@
 import {isEscapeKey, isMouseClick, toggleClass} from './utils.js';
+import {pristine} from './validate.js';
 
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const DEFAULT_PHOTO_URL = 'img/upload-default-picture.jpg';
@@ -46,6 +47,7 @@ const closePictureUploadModal = (evt) => {
     pictureUploadButton.value = '';
     document.removeEventListener('keydown', closePictureUploadModal);
     pictureUploadModalCloseButton.removeEventListener('click', closePictureUploadModal);
+    pristine.reset();
   }
 };
 

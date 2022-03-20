@@ -669,12 +669,16 @@ main {
   border: none;
 }
 
+.text {
+  position: relative;
+}
+
 .text__label {
   display: flex;
   flex-direction: column;
 }
 
-.text__label--error{
+.text__label--error {
   display: block;
   margin: -20px auto 0;
   width: 450px;
@@ -683,6 +687,11 @@ main {
   background-color: #cc0000;
   color: #ffffff;
   border-radius: 5px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 53px;
+  z-index: 0;
 }
 
 .text__hashtags {

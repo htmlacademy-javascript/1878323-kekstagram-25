@@ -529,24 +529,37 @@ main {
 
 .effect-level {
   position: absolute;
-  bottom: 10px;
+  bottom: 9px;
   left: 50%;
 
+  padding: 7px 11px 0;
+
   width: 495px;
-  height: 33px;
+  height: 34px;
 
   font-size: 12px;
-  line-height: 42px;
   text-align: center;
   color: #ffffff;
   white-space: nowrap;
 
   background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 33px;
+  border-radius: 34px;
 
   -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
+}
+
+.effect-level .noUi-target {
+  border-radius: 16px;
+}
+
+.effect-level .noUi-connects {
+  border-radius: 13px;
+}
+
+.effect-level .noUi-connect {
+  background: #ffe753;
 }
 
 .effect-level__value {
@@ -667,31 +680,6 @@ main {
 
   text-align: center;
   border: none;
-}
-
-.text {
-  position: relative;
-}
-
-.text__label {
-  display: flex;
-  flex-direction: column;
-}
-
-.text__label--error {
-  display: block;
-  margin: -20px auto 0;
-  width: 450px;
-  text-transform: lowercase;
-  font-size: 0.84em;
-  background-color: #cc0000;
-  color: #ffffff;
-  border-radius: 5px;
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 53px;
-  z-index: 0;
 }
 
 .text__hashtags {

@@ -10,7 +10,7 @@ const MIN_LIKES_ID = 15;
 const MAX_LIKES_ID = 200;
 
 /**
- * Генерация URL аватара пользователя
+ * Генерация URL аватара пользователя.
  */
 const createAvatarUrl = () => {
   const avatarId = getRandomPositiveInteger(MIN_AVATAR_ID, MAX_AVATAR_ID);

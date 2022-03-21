@@ -1,14 +1,14 @@
 import {stopEscPropagation} from './utils.js';
 
-const imageUploadForm = document.querySelector('.img-upload__form');
-const hashtagsElement = imageUploadForm.querySelector('.text__hashtags');
-const commentElement = imageUploadForm.querySelector('.text__description');
-
 const HASHTAGS_MAX_COUNT = 5;
 const HASHTAGS_MIN_SYMBOLS = 2;
 const HASHTAGS_MAX_SYMBOLS = 20;
 const HASHTAGS_REGEX = /^#[A-Za-zА-Яа-яЕё0-9]{1,19}$/;
 const DESCRIPTION_MAX_LENGTH = 140;
+
+const imageUploadForm = document.querySelector('.img-upload__form');
+const hashtagsElement = imageUploadForm.querySelector('.text__hashtags');
+const commentElement = imageUploadForm.querySelector('.text__description');
 
 /**
  * Разбиение строки с хэштегами на массив из отдельных хэштегов.

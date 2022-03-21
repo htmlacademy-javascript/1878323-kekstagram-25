@@ -80,6 +80,7 @@ const closePictureModal = (evt) => {
 };
 
 const openPictureModal = (picture) => {
+  socialCommentsLoader.addEventListener('click', loadMoreCommentHandler);
   totalCommentList = picture.comments;
   totalCommentListLength = totalCommentList.length;
   tooglePictureModal(true);
@@ -87,8 +88,5 @@ const openPictureModal = (picture) => {
   window.addEventListener('keydown', closePictureModal);
   cancelButton.addEventListener('click', closePictureModal);
 };
-
-socialCommentsLoader.addEventListener('click', loadMoreCommentHandler);
-
 
 export {openPictureModal};

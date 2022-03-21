@@ -10,9 +10,6 @@ const HASHTAGS_MAX_SYMBOLS = 20;
 const HASHTAGS_REGEX = /^#[A-Za-zА-Яа-яЕё0-9]{1,19}$/;
 const DESCRIPTION_MAX_LENGTH = 140;
 
-hashtagsElement.addEventListener('keydown', stopEscPropagation);
-commentElement.addEventListener('keydown', stopEscPropagation);
-
 /**
  * Разбиение строки с хэштегами на массив из отдельных хэштегов.
  * Все символы в строке переводятся в нижний регистр для более корректного сравнения хэштегов друг с другом.
@@ -84,6 +81,9 @@ const pristine = new Pristine(imageUploadForm, {
   errorTextTag: 'span',
   errorTextClass: 'text__label--error'
 });
+
+hashtagsElement.addEventListener('keydown', stopEscPropagation);
+commentElement.addEventListener('keydown', stopEscPropagation);
 
 pristine.addValidator(hashtagsElement, validateStartHash, 'Хэштег должен начинаться с символа решётки (#)');
 pristine.addValidator(hashtagsElement, validateTagOnlyHash, 'Хэштег не должен состоять только из символа решётки (#)');

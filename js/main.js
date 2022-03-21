@@ -1,8 +1,8 @@
-import './picture-upload.js';
-import './validate.js';
 import {createPosts} from './data.js';
 import {createItemPicture} from './picture.js';
 import {openPictureModal} from './picture-big.js';
+import './picture-upload.js';
+import './validate.js';
 
 const postsList = createPosts();
 const picturesList = document.querySelector('.pictures');

@@ -4,8 +4,9 @@ const SCALE_STEP = 25;
 
 const pictureUploadPreview = document.querySelector('.img-upload__preview img');
 const scaleControlValue = document.querySelector('.scale__control--value');
+const pictureUploadScale = document.querySelector('.img-upload__scale');
 
-let scaleValue = 100;
+let scaleValue = SCALE_MAX;
 
 const pictureScaleClickHandler = (evt) => {
   if (evt.target.classList.contains('scale__control--smaller')) {
@@ -16,19 +17,12 @@ const pictureScaleClickHandler = (evt) => {
     scaleValue += SCALE_STEP;
   }
 
-  if (scaleValue < 25) {
-    scaleValue = SCALE_MIN;
-  }
-
-  if (scaleValue > SCALE_MAX) {
-    scaleValue = SCALE_MAX;
-  }
+  scaleValue = scaleValue < SCALE_MIN ? SCALE_MIN : SCALE_MAX;
 
   scaleControlValue.value = `${scaleValue}%`;
-  scaleControlValue.setAttribute('value', `${scaleValue}%`);
   pictureUploadPreview.style.transform = `scale(${(scaleValue / 100)})`;
 };
 
-export {
-  pictureScaleClickHandler
-};
+pictureUploadScale.addEventListener('click', pictureScaleClickHandler);
+
+

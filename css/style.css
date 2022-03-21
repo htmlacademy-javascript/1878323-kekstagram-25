@@ -682,6 +682,28 @@ main {
   border: none;
 }
 
+.text__label {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.text__label--error {
+  display: block;
+  margin: -20px auto 0;
+  width: 450px;
+  text-transform: lowercase;
+  font-size: 0.84em;
+  background-color: #cc0000;
+  color: #ffffff;
+  border-radius: 5px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 53px;
+  z-index: 1;
+}
+
 .text__hashtags {
   width: 450px;
 

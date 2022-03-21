@@ -1,6 +1,6 @@
 import {isEscapeKey, isMouseClick, toggleClass} from './utils.js';
-import {pictureScaleClickHandler} from './picture-scale.js';
-import {effectsListChangeHandler} from './picture-effect.js';
+import './picture-scale.js';
+import './picture-effect.js';
 import {pristine} from './validate.js';
 
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
@@ -13,8 +13,6 @@ const pictureUploadModal = pictureUploadForm.querySelector('.img-upload__overlay
 const pictureUploadPreview = pictureUploadModal.querySelector('.img-upload__preview img');
 const pictureUploadModalCloseButton = pictureUploadModal.querySelector('.img-upload__cancel');
 const scaleControlValue = document.querySelector('.scale__control--value');
-const pictureUploadScale = document.querySelector('.img-upload__scale');
-const effectsList = document.querySelector('.effects__list');
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 
 /**
@@ -51,8 +49,8 @@ const closePictureUploadModal = (evt) => {
     pictureUploadButton.value = '';
     document.removeEventListener('keydown', closePictureUploadModal);
     pictureUploadModalCloseButton.removeEventListener('click', closePictureUploadModal);
-    pictureUploadScale.removeEventListener('click', pictureScaleClickHandler);
-    effectsList.removeEventListener('change', effectsListChangeHandler);
+    // pictureUploadScale.removeEventListener('click', pictureScaleClickHandler);
+    // effectsList.removeEventListener('change', effectsListChangeHandler);
     pristine.reset();
     pictureUploadPreview.style = '';
     pictureUploadPreview.classList = '';
@@ -68,13 +66,9 @@ const openPictureUploadModal = () => {
   document.addEventListener('keydown', closePictureUploadModal);
   pictureUploadModalCloseButton.addEventListener('click', closePictureUploadModal);
 
-  pictureUploadScale.addEventListener('click', pictureScaleClickHandler);
   scaleControlValue.value = '100%';
-  scaleControlValue.setAttribute('value', '100%');
   pictureUploadPreview.style.transform = 'scale(1)';
   effectLevelSlider.classList.add('hidden');
-
-  effectsList.addEventListener('change', effectsListChangeHandler);
 };
 
 pictureUploadButton.addEventListener('change', uploadPicture);

@@ -124,4 +124,4 @@ effectLevelSlider.noUiSlider.on('update', () => {
   pictureUploadPreview.style.filter = `${effect[selectedFilter].filter}(${sliderValue}${effect[selectedFilter].unit})`;
 });
 
-export {effectsListChangeHandler};
+effectsList.addEventListener('change', effectsListChangeHandler);

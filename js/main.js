@@ -26,7 +26,7 @@ const createPictureList = () => {
 picturesList.append(createPictureList());
 
 /**
- * Связка превью картинок на сайте и модального окна просмотра большого формата и комментариев
+ * Связка превью картинок на сайте и модального окна просмотра большого формата и комментариев.
  */
 picturesList.querySelectorAll('.picture').forEach((item, i) => {
   item.addEventListener('click', () => {

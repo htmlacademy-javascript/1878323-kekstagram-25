@@ -1,5 +1,9 @@
 import {isEscapeKey, isMouseClick, toggleClass} from './utils.js';
 
+const COMMENT_IMAGE_WEIGHT = 35;
+const COMMENT_IMAGE_HEIGHT = 35;
+const COMMENTS_PORTION = 5;
+
 const bodyElement = document.querySelector('body');
 const pictureBig = document.querySelector('.big-picture');
 const bigPictureImg = pictureBig.querySelector('.big-picture__img');
@@ -7,15 +11,10 @@ const likesCount = pictureBig.querySelector('.likes-count');
 const commentsCountText = pictureBig.querySelector('.comments-count');
 const socialCaption = pictureBig.querySelector('.social__caption');
 const socialComments = pictureBig.querySelector('.social__comments');
-const cancelButton = document.querySelector('.big-picture__cancel');
 
+const cancelButton = document.querySelector('.big-picture__cancel');
 const socialCommentCountNow = document.querySelector('.comments-count-now');
 const socialCommentsLoader = document.querySelector('.social__comments-loader');
-
-const COMMENT_IMAGE_WEIGHT = 35;
-const COMMENT_IMAGE_HEIGHT = 35;
-
-const COMMENTS_PORTION = 5;
 
 let shownCommentsCount = 0;
 let totalCommentList = [];
@@ -80,6 +79,7 @@ const closePictureModal = (evt) => {
 };
 
 const openPictureModal = (picture) => {
+  socialCommentsLoader.addEventListener('click', loadMoreCommentHandler);
   totalCommentList = picture.comments;
   totalCommentListLength = totalCommentList.length;
   tooglePictureModal(true);
@@ -87,8 +87,5 @@ const openPictureModal = (picture) => {
   window.addEventListener('keydown', closePictureModal);
   cancelButton.addEventListener('click', closePictureModal);
 };
-
-socialCommentsLoader.addEventListener('click', loadMoreCommentHandler);
-
 
 export {openPictureModal};

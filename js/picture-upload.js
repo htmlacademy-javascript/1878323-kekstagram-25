@@ -65,7 +65,6 @@ const openPictureUploadModal = () => {
   toogleUploadPictureModal(true);
   document.addEventListener('keydown', closePictureUploadModal);
   pictureUploadModalCloseButton.addEventListener('click', closePictureUploadModal);
-
   scaleControlValue.value = '100%';
   pictureUploadPreview.style.transform = 'scale(1)';
   effectLevelSlider.classList.add('hidden');

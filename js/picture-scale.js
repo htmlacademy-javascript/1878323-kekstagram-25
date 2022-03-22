@@ -19,9 +19,7 @@ const pictureScaleClickHandler = (evt) => {
 
   if (scaleValue < SCALE_MIN) {
     scaleValue = SCALE_MIN;
-  }
-
-  if (scaleValue > SCALE_MAX) {
+  } else if (scaleValue > SCALE_MAX) {
     scaleValue = SCALE_MAX;
   }
 

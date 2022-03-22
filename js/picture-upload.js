@@ -1,8 +1,10 @@
 import {isEscapeKey, isMouseClick, toggleClass} from './utils.js';
+import './picture-scale.js';
+import './picture-effect.js';
 import {pristine} from './validate.js';
 
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-const DEFAULT_PHOTO_URL = 'img/upload-default-picture.jpg';
+const DEFAULT_PHOTO_URL = 'img/upload-default-image.jpg';
 
 const bodyElement = document.querySelector('body');
 const pictureUploadForm = document.querySelector('.img-upload__form');
@@ -10,6 +12,8 @@ const pictureUploadButton = pictureUploadForm.querySelector('.img-upload__start 
 const pictureUploadModal = pictureUploadForm.querySelector('.img-upload__overlay');
 const pictureUploadPreview = pictureUploadModal.querySelector('.img-upload__preview img');
 const pictureUploadModalCloseButton = pictureUploadModal.querySelector('.img-upload__cancel');
+const scaleControlValue = document.querySelector('.scale__control--value');
+const effectLevelSlider = document.querySelector('.effect-level__slider');
 
 /**
  * Загрузка собственного изображения и подстановка в модальное окно.
@@ -45,7 +49,11 @@ const closePictureUploadModal = (evt) => {
     pictureUploadButton.value = '';
     document.removeEventListener('keydown', closePictureUploadModal);
     pictureUploadModalCloseButton.removeEventListener('click', closePictureUploadModal);
+    // pictureUploadScale.removeEventListener('click', pictureScaleClickHandler);
+    // effectsList.removeEventListener('change', effectsListChangeHandler);
     pristine.reset();
+    pictureUploadPreview.style = '';
+    pictureUploadPreview.classList = '';
   }
 };
 
@@ -57,6 +65,9 @@ const openPictureUploadModal = () => {
   toogleUploadPictureModal(true);
   document.addEventListener('keydown', closePictureUploadModal);
   pictureUploadModalCloseButton.addEventListener('click', closePictureUploadModal);
+  scaleControlValue.value = '100%';
+  pictureUploadPreview.style.transform = 'scale(1)';
+  effectLevelSlider.classList.add('hidden');
 };
 
 pictureUploadButton.addEventListener('change', uploadPicture);

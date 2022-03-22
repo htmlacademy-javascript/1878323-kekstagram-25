@@ -11,9 +11,7 @@ let scaleValue = SCALE_MAX;
 const pictureScaleClickHandler = (evt) => {
   if (evt.target.classList.contains('scale__control--smaller')) {
     scaleValue -= SCALE_STEP;
-  }
-
-  if (evt.target.classList.contains('scale__control--bigger')) {
+  } else if (evt.target.classList.contains('scale__control--bigger')) {
     scaleValue += SCALE_STEP;
   }
 

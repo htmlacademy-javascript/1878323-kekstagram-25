@@ -1,3 +1,8 @@
+const GET_URL = 'https://25.javascript.pages.academy/kekstagram/data';  // Адрес сервера для получения изображений
+const SEND_URL = 'https://25.javascript.pages.academy/kekstagram';      // Адрес сервера для отправки изображений
+const MESSAGE_TIMEOUT = 5000;                                           // Время показа (в миллисекундах) всплывающего окошка с ошибкой получения изображений с сервера
+const DEBOUNCE_DELAY = 500;                                             // Пауза (в миллисекундах) перед выполнением коллбек-функции, переданной в debounce-функцию
+
 const NAMES = [
   'Иван',
   'Хуан Себастьян',
@@ -31,4 +36,4 @@ const DESCRIPTION = [
   'С пацанами'
 ];
 
-export {NAMES, COMMENTS, DESCRIPTION};
+export {GET_URL, SEND_URL, MESSAGE_TIMEOUT, DEBOUNCE_DELAY, NAMES, COMMENTS, DESCRIPTION};

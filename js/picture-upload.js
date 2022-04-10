@@ -99,7 +99,7 @@ const closePictureUploadModal = (evt) => {
   if (isEscapeKey(evt) || isMouseClick(evt)) {
     toogleUploadPictureModal(false);
     pictureUploadForm.reset();
-    pictureUploadForm.removeEventListener('submit', setFormSubmitHandler);
+    // pictureUploadForm.removeEventListener('submit', setFormSubmitHandler);
     pictureUploadButton.value = '';
     document.removeEventListener('keydown', closePictureUploadModal);
     pictureUploadModalCloseButton.removeEventListener('click', closePictureUploadModal);

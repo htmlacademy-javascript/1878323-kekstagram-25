@@ -1,8 +1,9 @@
 import {GET_URL, SEND_URL} from './constants.js';
 
+
 /**
  * Получает данные с сервера, проверяет на корректность и отправляет дальше по цепочке промисов
- * @param {function(*): DocumentFragment} onSuccess — действие при успешном получении данных с сервера
+ * @param {callback} onSuccess — действие при успешном получении данных с сервера
  * @param {callback} onFail — действие при сбое получения данных
  */
 const getData = (onSuccess, onFail) => {
@@ -41,7 +42,4 @@ const sendData = (onSuccess, onFail, body) => {
     });
 };
 
-export {
-  getData,
-  sendData
-};
+export {getData, sendData};

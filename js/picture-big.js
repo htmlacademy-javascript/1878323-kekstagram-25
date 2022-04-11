@@ -1,8 +1,5 @@
 import {isEscapeKey, isMouseClick, toggleClass} from './utils.js';
-
-const COMMENT_PICTURE_WEIGHT = 35;
-const COMMENT_PICTURE_HEIGHT = 35;
-const COMMENTS_PORTION = 5;
+import {COMMENT_PICTURE_HEIGHT, COMMENT_PICTURE_WEIGHT, COMMENTS_PORTION} from './constants.js';
 
 const bodyElement = document.querySelector('body');
 const pictureBig = document.querySelector('.big-picture');

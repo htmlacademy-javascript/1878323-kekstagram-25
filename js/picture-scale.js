@@ -1,6 +1,4 @@
-const SCALE_MIN = 25;
-const SCALE_MAX = 100;
-const SCALE_STEP = 25;
+import {PERCENT_TO_FRACTION, SCALE_MAX, SCALE_MIN, SCALE_STEP} from './constants.js';
 
 const scaleControlValue = document.querySelector('.scale__control--value');
 const pictureUploadPreview = document.querySelector('.img-upload__preview img');
@@ -22,7 +20,7 @@ const pictureScaleClickHandler = (evt) => {
   }
 
   scaleControlValue.value = `${scaleValue}%`;
-  pictureUploadPreview.style.transform = `scale(${(scaleValue / 100)})`;
+  pictureUploadPreview.style.transform = `scale(${(scaleValue / PERCENT_TO_FRACTION)})`;
 };
 
 pictureUploadScale.addEventListener('click', pictureScaleClickHandler);

@@ -1,3 +1,20 @@
+import {DEBOUNCE_DELAY} from './constants.js';
+
+/**
+ * debounce для устранения дребезга.
+ * Источник - https://www.freecodecamp.org/news/javascript-debounce-example
+ *
+ * @param {callback} callback — функция, выполнение которой нужно задержать на заданное время.
+ * @param {number} timeoutDelay — время в миллисекундах. Пауза перед выполнением переданной функции.
+ */
+const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
 /**
  * Проверка длины строки на превышение лимита количества символов.
  * Пробелы в по обоим концам строки не учитываются в подсчете.
@@ -106,6 +123,7 @@ const stopEscPropagation = (evt) => {
 const toggleClass = (element, className, isHidden) => element.classList.toggle(className, isHidden);
 
 export {
+  debounce,
   getRandomPositiveInteger,
   isStringNotOverLimit,
   createArrayConsistentNumbers,

@@ -8,7 +8,13 @@ import {GET_URL, SEND_URL} from './constants.js';
  */
 const getData = (onSuccess, onFail) => {
   fetch(GET_URL)
-    .then((response) => response.json())
+    .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+    )
     .then((data) => {
       onSuccess(data);
     })
@@ -27,15 +33,18 @@ const sendData = (onSuccess, onFail, body) => {
   fetch(SEND_URL,
     {
       method: 'POST',
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      mode: 'no-cors',
       body,
     },
   )
     .then((response) => {
       if (response.ok) {
-        onSuccess();
-      } else {
-        onFail();
+        return onSuccess();
       }
+      throw new Error(`${response.status} ${response.statusText}`);
     })
     .catch(() => {
       onFail();

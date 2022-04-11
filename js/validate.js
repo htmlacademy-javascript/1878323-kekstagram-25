@@ -93,7 +93,6 @@ const getValidateHashText = (value) => {
 
 const getValidateHashStatus = (value) => !validateStartHash(value) && !validateTagOnlyHash(value) && !validateTagsCount(value) && !validateTagsDuplicate(value) && !validateTagLength(value) && !validateTagRegEx(value);
 
-
 const validatePristine = new Pristine(imageUploadForm, {
   classTo: 'text__label',
   errorClass: 'text__label--invalid',
@@ -104,11 +103,7 @@ const validatePristine = new Pristine(imageUploadForm, {
 });
 
 validatePristine.addValidator(commentElement, validateDescriptionLength, `Максимальная длина комментария - ${DESCRIPTION_MAX_LENGTH} символов`);
-validatePristine.addValidator(
-  hashtagsElement,
-  getValidateHashStatus,
-  getValidateHashText
-);
+validatePristine.addValidator(hashtagsElement, getValidateHashStatus, getValidateHashText);
 
 hashtagsElement.addEventListener('keydown', stopEscPropagation);
 commentElement.addEventListener('keydown', stopEscPropagation);

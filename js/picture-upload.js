@@ -8,8 +8,9 @@ import './picture-scale.js';
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];                       // Разрешения изображений, доступные для отправки на сервер
 const DEFAULT_PHOTO_URL = 'img/upload-default-image.jpg';               // Адрес изображения-заглушки для показа до загрузки своей фотографии
 
-const bodyElement = document.querySelector('body');
+const pageBody = document.querySelector('body');
 const pictureUploadForm = document.querySelector('.img-upload__form');
+const pictureUploadSubmitButton = document.querySelector('.img-upload__submit');
 const pictureUploadButton = pictureUploadForm.querySelector('.img-upload__start input[type=file]');
 const pictureUploadModal = pictureUploadForm.querySelector('.img-upload__overlay');
 const pictureUploadPreview = pictureUploadModal.querySelector('.img-upload__preview img');
@@ -18,7 +19,7 @@ const scaleControlValue = document.querySelector('.scale__control--value');
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 
 const toogleUploadPictureModal = (isHidden) => {
-  toggleClass(bodyElement, 'modal-open', isHidden);
+  toggleClass(pageBody, 'modal-open', isHidden);
   toggleClass(pictureUploadModal, 'hidden', !isHidden);
 };
 
@@ -27,8 +28,8 @@ const toogleUploadPictureModal = (isHidden) => {
  * Отображение надписи для уведомления пользователя о процессе отправки.
  */
 const blockSubmitButton = () => {
-  pictureUploadModalCloseButton.disabled = true;
-  pictureUploadModalCloseButton.textContent = 'Отправляется...';
+  pictureUploadSubmitButton.disabled = true;
+  pictureUploadSubmitButton.textContent = 'Отправляется...';
 };
 
 
@@ -37,8 +38,8 @@ const blockSubmitButton = () => {
  * Как при удачной отправке данных, так и при неудачной.
  */
 const unblockSubmitButton = () => {
-  pictureUploadModalCloseButton.disabled = false;
-  pictureUploadModalCloseButton.textContent = 'Опубликовать';
+  pictureUploadSubmitButton.disabled = false;
+  pictureUploadSubmitButton.textContent = 'Опубликовать';
 };
 
 /**
@@ -58,7 +59,8 @@ const setUploadPictureModalDefault = () => {
 
 const setFormSubmitHandler = (evt) => {
   evt.preventDefault();
-  if (!validatePristine.validate()) {
+  console.log(validatePristine.validate())
+  if (validatePristine.validate()) {
     blockSubmitButton();
     sendData(
       () => {
@@ -72,6 +74,10 @@ const setFormSubmitHandler = (evt) => {
       new FormData(evt.target),
     );
   }
+  // else {
+  //   pictureUploadSubmitButton.disabled = true;
+  //   pictureUploadSubmitButton.textContent = 'блаблабла';
+  // }
 };
 
 /**

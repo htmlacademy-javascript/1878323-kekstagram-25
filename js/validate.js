@@ -73,7 +73,7 @@ const validateDescriptionLength = (value) => (
   value.length <= DESCRIPTION_MAX_LENGTH
 );
 
-const validator = (value) => {
+const getValidateHashText = (value) => {
   let message;
   if (!validateStartHash(value)) {
     message = 'Хэштег должен начинаться с символа решётки (#)';
@@ -91,6 +91,25 @@ const validator = (value) => {
   return message;
 };
 
+const getValidateHashStatus = (value) => {
+  let isValidate = true;
+  if (!validateStartHash(value)) {
+    isValidate = false;
+  } else if (!validateTagOnlyHash(value)) {
+    isValidate = false;
+  } else if (!validateTagsCount(value)) {
+    isValidate = false;
+  } else if (!validateTagsDuplicate(value)) {
+    isValidate = false;
+  } else if (!validateTagLength(value)) {
+    isValidate = false;
+  } else if (!validateTagRegEx(value)) {
+    isValidate = false;
+  }
+  return isValidate;
+};
+
+
 const validatePristine = new Pristine(imageUploadForm, {
   classTo: 'text__label',
   errorClass: 'text__label--invalid',
@@ -103,8 +122,8 @@ const validatePristine = new Pristine(imageUploadForm, {
 validatePristine.addValidator(commentElement, validateDescriptionLength, `Максимальная длина комментария - ${DESCRIPTION_MAX_LENGTH} символов`);
 validatePristine.addValidator(
   hashtagsElement,
-  (value) => (!validator(value)),
-  (value) => (validator(value))
+  (value) => (getValidateHashStatus(value)),
+  (value) => (getValidateHashText(value))
 );
 
 hashtagsElement.addEventListener('keydown', stopEscPropagation);

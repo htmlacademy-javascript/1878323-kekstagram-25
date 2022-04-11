@@ -9,11 +9,11 @@ import {GET_URL, SEND_URL} from './constants.js';
 const getData = (onSuccess, onFail) => {
   fetch(GET_URL)
     .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error(`${response.status} ${response.statusText}`);
+      if (response.ok) {
+        return response.json();
       }
+      throw new Error(`${response.status} ${response.statusText}`);
+    }
     )
     .then((data) => {
       onSuccess(data);

@@ -23,74 +23,48 @@ const splitHashtags = (hashtagsString) => (
   hashtagsString.trim().toLowerCase().split(' ').filter((tag) => (tag !== ''))
 );
 
-const validator = (value) => {
-  let message = '';
-  let checkValid = false;
-  if (splitHashtags(value).every((tag) => (tag.startsWith('#')))) {
-    message += 'Хэштег должен начинаться с символа решётки (#)';
-    checkValid = true;
-  } else if (!(splitHashtags(value).some((tag) => (tag.startsWith('#') && tag.length === 1)))) {
-    message += 'Хэштег не должен состоять только из символа решётки (#)';
-    checkValid = true;
-  } else if (splitHashtags(value).length <= HASHTAGS_MAX_COUNT) {
-    message += `Не больше ${HASHTAGS_MAX_COUNT} хэштегов`;
-    checkValid = true;
-  } else if (!(splitHashtags(value).some((tag, index) => splitHashtags(value).indexOf(tag) !== index))) {
-    message += 'Хэштеги не должны повторяться';
-    checkValid = true;
-  } else if (splitHashtags(value).every((tag) => (tag.length >= HASHTAGS_MIN_SYMBOLS && tag.length <= HASHTAGS_MAX_SYMBOLS))) {
-    message += `Длина хэштега - от ${HASHTAGS_MIN_SYMBOLS} до ${HASHTAGS_MAX_SYMBOLS} символов, включая решётку`;
-    checkValid = true;
-  } else if (splitHashtags(value).every((tag) => (tag.match(HASHTAGS_REGEX)))) {
-    message += 'Хештег должен состоять только из букв и цифр';
-    checkValid = true;
-  }
-  return {checkValid: checkValid, message: message};
+/**
+ * Проверка, начинается ли хэштег с символа решетки (#).
+ */
+const validateStartHash = (value) => (
+  splitHashtags(value).every((tag) => (tag.startsWith('#')))
+);
+
+/**
+ * Проверка, не состоит ли хэштег только из символа решетки (#).
+ */
+const validateTagOnlyHash = (value) => (
+  !(splitHashtags(value).some((tag) => (tag.startsWith('#') && tag.length === 1)))
+);
+
+/**
+ * Проверка на превышение количества хэштегов.
+ */
+const validateTagsCount = (value) => (
+  splitHashtags(value).length <= HASHTAGS_MAX_COUNT
+);
+
+/**
+ * Проверка на наличие повторяющихся хэштегов.
+ */
+const validateTagsDuplicate = (value) => {
+  const hashtags = splitHashtags(value);
+  return !(hashtags.some((tag, index) => hashtags.indexOf(tag) !== index));
 };
 
+/**
+ * Проверка на минимальную и максимальную длину хэштега.
+ */
+const validateTagLength = (value) => (
+  splitHashtags(value).every((tag) => (tag.length >= HASHTAGS_MIN_SYMBOLS && tag.length <= HASHTAGS_MAX_SYMBOLS))
+);
 
-// /**
-//  * Проверка, начинается ли хэштег с символа решетки (#).
-//  */
-// const validateStartHash = (value) => (
-//   splitHashtags(value).every((tag) => (tag.startsWith('#')))
-// );
-//
-// /**
-//  * Проверка, не состоит ли хэштег только из символа решетки (#).
-//  */
-// const validateTagOnlyHash = (value) => (
-//   !(splitHashtags(value).some((tag) => (tag.startsWith('#') && tag.length === 1)))
-// );
-//
-// /**
-//  * Проверка на превышение количества хэштегов.
-//  */
-// const validateTagsCount = (value) => (
-//   splitHashtags(value).length <= HASHTAGS_MAX_COUNT
-// );
-//
-// /**
-//  * Проверка на наличие повторяющихся хэштегов.
-//  */
-// const validateTagsDuplicate = (value) => {
-//   const hashtags = splitHashtags(value);
-//   return !(hashtags.some((tag, index) => hashtags.indexOf(tag) !== index));
-// };
-//
-// /**
-//  * Проверка на минимальную и максимальную длину хэштега.
-//  */
-// const validateTagLength = (value) => (
-//   splitHashtags(value).every((tag) => (tag.length >= HASHTAGS_MIN_SYMBOLS && tag.length <= HASHTAGS_MAX_SYMBOLS))
-// );
-//
-// /**
-//  * Проверка хэштегов на соответствие регулярному выражению.
-//  */
-// const validateTagRegEx = (value) => (
-//   splitHashtags(value).every((tag) => (tag.match(HASHTAGS_REGEX)))
-// );
+/**
+ * Проверка хэштегов на соответствие регулярному выражению.
+ */
+const validateTagRegEx = (value) => (
+  splitHashtags(value).every((tag) => (tag.match(HASHTAGS_REGEX)))
+);
 
 /**
  * Проверка хэштегов на соответствие регулярному выражению.
@@ -98,6 +72,24 @@ const validator = (value) => {
 const validateDescriptionLength = (value) => (
   value.length <= DESCRIPTION_MAX_LENGTH
 );
+
+const validator = (value) => {
+  let message;
+  if (!validateStartHash(value)) {
+    message = 'Хэштег должен начинаться с символа решётки (#)';
+  } else if (!validateTagOnlyHash(value)) {
+    message = 'Хэштег не должен состоять только из символа решётки (#)';
+  } else if (!validateTagsCount(value)) {
+    message = `Не больше ${HASHTAGS_MAX_COUNT} хэштегов`;
+  } else if (!validateTagsDuplicate(value)) {
+    message = 'Хэштеги не должны повторяться';
+  } else if (!validateTagLength(value)) {
+    message = `Длина хэштега - от ${HASHTAGS_MIN_SYMBOLS} до ${HASHTAGS_MAX_SYMBOLS} символов, включая решётку`;
+  } else if (!validateTagRegEx(value)) {
+    message = 'Хештег должен состоять только из букв и цифр';
+  }
+  return message;
+};
 
 const validatePristine = new Pristine(imageUploadForm, {
   classTo: 'text__label',
@@ -108,23 +100,15 @@ const validatePristine = new Pristine(imageUploadForm, {
   errorTextClass: 'text__label--error'
 });
 
-hashtagsElement.addEventListener('keydown', stopEscPropagation);
-commentElement.addEventListener('keydown', stopEscPropagation);
-
-// validatePristine.addValidator(hashtagsElement, validateStartHash, 'Хэштег должен начинаться с символа решётки (#)');
-// validatePristine.addValidator(hashtagsElement, validateTagOnlyHash, 'Хэштег не должен состоять только из символа решётки (#)');
-// validatePristine.addValidator(hashtagsElement, validateTagsCount, `Не больше ${HASHTAGS_MAX_COUNT} хэштегов`);
-// validatePristine.addValidator(hashtagsElement, validateTagsDuplicate, 'Хэштеги не должны повторяться');
-// validatePristine.addValidator(hashtagsElement, validateTagLength, `Длина хэштега - от ${HASHTAGS_MIN_SYMBOLS} до ${HASHTAGS_MAX_SYMBOLS} символов, включая решётку`);
-// validatePristine.addValidator(hashtagsElement, validateTagRegEx, 'Хештег должен состоять только из букв и цифр');
 validatePristine.addValidator(commentElement, validateDescriptionLength, `Максимальная длина комментария - ${DESCRIPTION_MAX_LENGTH} символов`);
-
 validatePristine.addValidator(
   hashtagsElement,
-  (value) => (validator(value).checkValid),
-  (value) => (validator(value).message)
+  (value) => (!validator(value)),
+  (value) => (validator(value))
 );
 
+hashtagsElement.addEventListener('keydown', stopEscPropagation);
+commentElement.addEventListener('keydown', stopEscPropagation);
 imageUploadForm.addEventListener('submit', (evt) => {
   if (!validatePristine.validate()) {
     evt.preventDefault();

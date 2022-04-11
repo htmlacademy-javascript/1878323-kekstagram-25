@@ -1,7 +1,6 @@
 const GET_URL = 'https://25.javascript.pages.academy/kekstagram/data';  // Адрес сервера для получения изображений
 const SEND_URL = 'https://25.javascript.pages.academy/kekstagram';      // Адрес сервера для отправки изображений
 
-
 /**
  * Получает данные с сервера, проверяет на корректность и отправляет дальше по цепочке промисов
  * @param {callback} onSuccess — действие при успешном получении данных с сервера

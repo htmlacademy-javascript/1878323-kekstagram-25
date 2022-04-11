@@ -78,7 +78,7 @@ const getValidateHashText = (value) => {
   if (!validateStartHash(value)) {
     message = 'Хэштег должен начинаться с символа решётки (#)';
   } else if (!validateTagOnlyHash(value)) {
-    message = 'Хэштег не должен состоять только из символа решётки (#)';
+    message = 'Хэштег не должен состоять только из символа решётки (#) ';
   } else if (!validateTagsCount(value)) {
     message = `Не больше ${HASHTAGS_MAX_COUNT} хэштегов`;
   } else if (!validateTagsDuplicate(value)) {
@@ -91,23 +91,7 @@ const getValidateHashText = (value) => {
   return message;
 };
 
-const getValidateHashStatus = (value) => {
-  let isValidate = true;
-  if (!validateStartHash(value)) {
-    isValidate = false;
-  } else if (!validateTagOnlyHash(value)) {
-    isValidate = false;
-  } else if (!validateTagsCount(value)) {
-    isValidate = false;
-  } else if (!validateTagsDuplicate(value)) {
-    isValidate = false;
-  } else if (!validateTagLength(value)) {
-    isValidate = false;
-  } else if (!validateTagRegEx(value)) {
-    isValidate = false;
-  }
-  return isValidate;
-};
+const getValidateHashStatus = (value) => !validateStartHash(value) && !validateTagOnlyHash(value) && !validateTagsCount(value) && !validateTagsDuplicate(value) && !validateTagLength(value) && !validateTagRegEx(value);
 
 
 const validatePristine = new Pristine(imageUploadForm, {
@@ -122,8 +106,8 @@ const validatePristine = new Pristine(imageUploadForm, {
 validatePristine.addValidator(commentElement, validateDescriptionLength, `Максимальная длина комментария - ${DESCRIPTION_MAX_LENGTH} символов`);
 validatePristine.addValidator(
   hashtagsElement,
-  (value) => (getValidateHashStatus(value)),
-  (value) => (getValidateHashText(value))
+  getValidateHashStatus,
+  getValidateHashText
 );
 
 hashtagsElement.addEventListener('keydown', stopEscPropagation);

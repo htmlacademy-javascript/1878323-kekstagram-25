@@ -1,12 +1,12 @@
-import {isEscapeKey, isMouseClick, toggleClass} from './utils.js';
-import './picture-scale.js';
-import './picture-effect.js';
-import {validatePristine} from './validate.js';
-import {showSuccessModal, showErrorModal} from './modal-messages.js';
 import {sendData} from './fetch.js';
+import {isEscapeKey, isMouseClick, toggleClass} from './utils.js';
+import {validatePristine} from './validate.js';
+import {showErrorModal, showSuccessModal} from './modal-messages.js';
+import './picture-effect.js';
+import './picture-scale.js';
 
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-const DEFAULT_PHOTO_URL = 'img/upload-default-image.jpg';
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];                       // Разрешения изображений, доступные для отправки на сервер
+const DEFAULT_PHOTO_URL = 'img/upload-default-image.jpg';               // Адрес изображения-заглушки для показа до загрузки своей фотографии
 
 const bodyElement = document.querySelector('body');
 const pictureUploadForm = document.querySelector('.img-upload__form');
@@ -24,7 +24,7 @@ const toogleUploadPictureModal = (isHidden) => {
 
 /**
  * Блокировка кнопки Submit на время отправки данных на сервер.
- * Отображение надписи для уведомления пользователя о прочессе отправки.
+ * Отображение надписи для уведомления пользователя о процессе отправки.
  */
 const blockSubmitButton = () => {
   pictureUploadModalCloseButton.disabled = true;
@@ -36,8 +36,6 @@ const blockSubmitButton = () => {
  * Разблокировка кнопки Submit на время отправки данных на сервер.
  * Как при удачной отправке данных, так и при неудачной.
  */
-
-
 const unblockSubmitButton = () => {
   pictureUploadModalCloseButton.disabled = false;
   pictureUploadModalCloseButton.textContent = 'Опубликовать';

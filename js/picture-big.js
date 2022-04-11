@@ -1,8 +1,8 @@
 import {isEscapeKey, isMouseClick, toggleClass} from './utils.js';
 
-const COMMENT_PICTURE_WEIGHT = 35;
-const COMMENT_PICTURE_HEIGHT = 35;
-const COMMENTS_PORTION = 5;
+const COMMENT_PICTURE_WEIGHT = 35;                                      // Ширина изображения при добавлении
+const COMMENT_PICTURE_HEIGHT = 35;                                      // Высота изображения при добавлении
+const COMMENTS_PORTION = 5;                                             // Количество комментариев, порционно загружаемых на модалке с большой фотографией
 
 const bodyElement = document.querySelector('body');
 const pictureBig = document.querySelector('.big-picture');

@@ -1,11 +1,10 @@
-import {
-  DESCRIPTION_MAX_LENGTH,
-  HASHTAGS_MAX_COUNT,
-  HASHTAGS_MAX_SYMBOLS,
-  HASHTAGS_MIN_SYMBOLS,
-  HASHTAGS_REGEX
-} from './constants.js';
 import {stopEscPropagation} from './utils.js';
+
+const HASHTAGS_MAX_COUNT = 5;                                           // Максимальное количество хэштегов, доступных для добавления к своей фотографии
+const HASHTAGS_MIN_SYMBOLS = 2;                                         // Минимальная длина (в символах) хэштега, доступного для добавления к своей фотографии
+const HASHTAGS_MAX_SYMBOLS = 20;                                        // Максимальная длина (в символах) хэштега, доступного для добавления к своей фотографии
+const HASHTAGS_REGEX = /^#[A-Za-zА-Яа-яЕё0-9]{1,19}$/;                  // Регулярное выражение для проверки вводимых хэштегов
+const DESCRIPTION_MAX_LENGTH = 140;                                     // Максимальная длина (в символах) комментария, добавляемого к своей фотографии
 
 const imageUploadForm = document.querySelector('.img-upload__form');
 const hashtagsElement = imageUploadForm.querySelector('.text__hashtags');

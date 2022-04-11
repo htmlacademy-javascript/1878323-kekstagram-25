@@ -1,4 +1,4 @@
-import {DEBOUNCE_DELAY} from './constants.js';
+const DEBOUNCE_DELAY = 500;                                             // Пауза (в миллисекундах) перед выполнением коллбек-функции, переданной в debounce-функцию
 
 /**
  * debounce для устранения дребезга.

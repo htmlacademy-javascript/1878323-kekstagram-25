@@ -1,10 +1,12 @@
 import {sendData} from './fetch.js';
-import {DEFAULT_PHOTO_URL, FILE_TYPES} from './constants.js';
 import {isEscapeKey, isMouseClick, toggleClass} from './utils.js';
 import {validatePristine} from './validate.js';
 import {showErrorModal, showSuccessModal} from './modal-messages.js';
 import './picture-effect.js';
 import './picture-scale.js';
+
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];                       // Разрешения изображений, доступные для отправки на сервер
+const DEFAULT_PHOTO_URL = 'img/upload-default-image.jpg';               // Адрес изображения-заглушки для показа до загрузки своей фотографии
 
 const bodyElement = document.querySelector('body');
 const pictureUploadForm = document.querySelector('.img-upload__form');

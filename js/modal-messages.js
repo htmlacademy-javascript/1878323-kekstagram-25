@@ -1,5 +1,6 @@
 import {isEscapeKey, isMouseClick} from './utils.js';
-import {MESSAGE_TIMEOUT} from './constants.js';
+
+const MESSAGE_TIMEOUT = 5000;                                           // Время показа (в миллисекундах) всплывающего окошка с ошибкой получения изображений с сервера
 
 const pageBody = document.querySelector('body');
 const successModal = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
@@ -7,7 +8,6 @@ const successModalButton = successModal.querySelector('.success__button');
 const errorModal = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
 const errorModalButton = errorModal.querySelector('.error__button');
 const errorLoadingModal = document.querySelector('#error-loading').content.querySelector('.error-loading').cloneNode(true);
-
 
 /**
  * Удаление модального окна при успешной отправке фотографии на сервер.

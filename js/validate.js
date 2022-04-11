@@ -108,6 +108,7 @@ validatePristine.addValidator(hashtagsElement, getValidateHashStatus, getValidat
 hashtagsElement.addEventListener('keydown', stopEscPropagation);
 commentElement.addEventListener('keydown', stopEscPropagation);
 imageUploadForm.addEventListener('submit', (evt) => {
+
   if (!validatePristine.validate()) {
     evt.preventDefault();
   }

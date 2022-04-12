@@ -59,7 +59,6 @@ const setUploadPictureModalDefault = () => {
 
 const setFormSubmitHandler = (evt) => {
   evt.preventDefault();
-  console.log(validatePristine.validate())
   if (validatePristine.validate()) {
     blockSubmitButton();
     sendData(

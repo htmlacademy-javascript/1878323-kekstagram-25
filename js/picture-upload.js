@@ -35,7 +35,7 @@ const blockSubmitButton = () => {
 
 /**
  * Разблокировка кнопки Submit на время отправки данных на сервер.
- * Как при удачной отправке данных, так и при неудачной.
+ * Как при удачной отправке данных, так и при  неудачной.
  */
 const unblockSubmitButton = () => {
   pictureUploadSubmitButton.disabled = false;

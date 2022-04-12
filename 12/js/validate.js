@@ -91,7 +91,7 @@ const getValidateHashText = (value) => {
   return message;
 };
 
-const getValidateHashStatus = (value) => !validateStartHash(value) && !validateTagOnlyHash(value) && !validateTagsCount(value) && !validateTagsDuplicate(value) && !validateTagLength(value) && !validateTagRegEx(value);
+const getValidateHashStatus = (value) => validateStartHash(value) && validateTagOnlyHash(value) && validateTagsCount(value) && validateTagsDuplicate(value) && validateTagLength(value) && validateTagRegEx(value);
 
 const validatePristine = new Pristine(imageUploadForm, {
   classTo: 'text__label',
@@ -107,11 +107,11 @@ validatePristine.addValidator(hashtagsElement, getValidateHashStatus, getValidat
 
 hashtagsElement.addEventListener('keydown', stopEscPropagation);
 commentElement.addEventListener('keydown', stopEscPropagation);
-imageUploadForm.addEventListener('submit', (evt) => {
+// imageUploadForm.addEventListener('submit', (evt) => {
 
-  if (!validatePristine.validate()) {
-    evt.preventDefault();
-  }
-});
+//   if (!validatePristine.validate()) {
+//     evt.preventDefault();
+//   }
+// });
 
 export {validatePristine};

@@ -10,5 +10,7 @@ getData(
     renderPictureList(data);
     renderFilteredPicture(data);
   },
-  showModal('errorLoadingModal')
+  () => {
+    showModal('errorLoadingModal');
+  }
 );

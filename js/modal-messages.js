@@ -1,6 +1,6 @@
-import {isEscapeKey, isMouseClick} from './utils.js';
+import {isEscapeKey} from './utils.js';
 
-const MESSAGE_TIMEOUT = 5000;                                           // Время показа (в миллисекундах) всплывающего окошка с ошибкой получения изображений с сервера
+const MESSAGE_TIMEOUT = 5000;  // Время показа (в миллисекундах) всплывающего окошка с ошибкой получения изображений с сервера
 
 const pageBody = document.querySelector('body');
 const successModal = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
@@ -10,84 +10,65 @@ const errorModal = document.querySelector('#error').content.querySelector('.erro
 const errorModalButton = errorModal.querySelector('.error__button');
 const errorModalInner = errorModal.querySelector('.error__inner');
 const errorLoadingModal = document.querySelector('#error-loading').content.querySelector('.error-loading').cloneNode(true);
+const errorLoadingModalInner = errorModal.querySelector('.error-loading__inner');
 
-/**
- * Удаление модального окна при успешной отправке фотографии на сервер.
- * DOM-элемент с модальным окном удаляется из DOM-дерева, чтобы не засорять оперативную память.
- */
-const removeSuccessModal = (evt) => {
-  if (isEscapeKey(evt) || isMouseClick(evt)) {
+let activeModalName ='';
+
+const documentClickHandler = () => removeModal();
+const documentKeydownHandler = (evt) => {
+  if (isEscapeKey(evt) ) {
+    removeModal();
+  }
+};
+
+function removeModal() {
+  if (activeModalName === 'errorLoadingModal') {
+    errorLoadingModal.remove();
+  } else if (activeModalName === 'successModal') {
     successModal.remove();
-    document.removeEventListener('keydown', removeSuccessModal);
-  }
-};
-
-/**
- * Показ модального окна при успешной отправке фотографии на сервер.
- */
-const showSuccessModal = () => {
-  successModal.addEventListener('click',removeSuccessModal);
-  successModalInner.addEventListener('click', (evt) => {
-    evt.stopPropagation();
-  });
-  pageBody.append(successModal);
-  successModalButton.addEventListener('click', removeSuccessModal);
-  document.addEventListener('keydown', removeSuccessModal);
-};
-
-
-/**
- * Удаление модального окна при неудачной отправке фотографии на сервер.
- * DOM-элемент с модальным окном удаляется из DOM-дерева, чтобы не засорять оперативную память.
- */
-const removeErrorModal = (evt) => {
-  if (isEscapeKey(evt) || isMouseClick(evt)) {
+  } else if (activeModalName === 'errorModal') {
     errorModal.remove();
-    document.removeEventListener('keydown', removeErrorModal);
+  }
+  document.removeEventListener('click', documentClickHandler);
+  document.removeEventListener('keydown', documentKeydownHandler);
+};
+
+const successModalClickHandler = () => removeModal();
+const successModalButtonClickHandler = () => removeModal();
+const errorModalClickHandler = () => removeModal();
+const errorModalButtonClickHandler = () => removeModal();
+const errorLoadingModalClickHandler = () => removeModal();
+
+const showModal = (modalName) => {
+  document.addEventListener('click', documentClickHandler);
+  document.addEventListener('keydown', documentKeydownHandler);
+  activeModalName = modalName;
+
+  if (modalName === 'errorLoadingModal') {
+    pageBody.append(errorLoadingModal);
+    errorLoadingModal.addEventListener('click', errorLoadingModalClickHandler);
+    errorLoadingModalInner.addEventListener('click', (evt) => {
+      evt.stopPropagation();
+    });
+    setTimeout(() => {
+      removeModal();
+    }, MESSAGE_TIMEOUT);
+  } else if (modalName === 'successModal') {
+    pageBody.append(successModal);
+    successModal.addEventListener('click', successModalClickHandler);
+    successModalInner.addEventListener('click', (evt) => {
+      evt.stopPropagation();
+    });
+    successModalButton.addEventListener('click', successModalButtonClickHandler);
+  } else if (modalName === 'errorModal') {
+    pageBody.append(errorModal);
+    errorModal.addEventListener('click', errorModalClickHandler);
+    errorModalInner.addEventListener('click', (evt) => {
+      evt.stopPropagation();
+    });
+    errorModalButton.addEventListener('click', errorModalButtonClickHandler);
   }
 };
 
 
-/**
- * Показ модального окна при неудачной отправке фотографии на сервер.
- */
-const showErrorModal = () => {
-  errorModal.addEventListener('click',removeErrorModal);
-  errorModalInner.addEventListener('click', (evt) => {
-    evt.stopPropagation();
-  });
-  pageBody.append(errorModal);
-  errorModalButton.addEventListener('click', removeErrorModal);
-  document.addEventListener('keydown', removeErrorModal);
-};
-
-
-/**
- * Удаление модального окна при неудачной загрузке фотографий с сервера.
- * DOM-элемент с модальным окном удаляется из DOM-дерева, чтобы не засорять оперативную память.
- */
-const removeErrorLoadingModal = () => {
-  errorLoadingModal.remove();
-  document.removeEventListener('click', removeErrorLoadingModal);
-  document.removeEventListener('keydown', removeErrorLoadingModal);
-};
-
-
-/**
- * Показ модального окна при неудачной загрузке фотографий с сервера.
- */
-const showErrorLoadingModal = () => {
-  pageBody.append(errorLoadingModal);
-  document.addEventListener('click', removeErrorLoadingModal);
-  document.addEventListener('keydown', removeErrorLoadingModal);
-  setTimeout(() => {
-    removeErrorLoadingModal();
-  }, MESSAGE_TIMEOUT);
-};
-
-
-export {
-  showSuccessModal,
-  showErrorModal,
-  showErrorLoadingModal
-};
+export {showModal};

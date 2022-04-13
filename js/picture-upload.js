@@ -63,11 +63,11 @@ const setFormSubmitHandler = (evt) => {
     blockSubmitButton();
     sendData(
       () => {
-        showModal('SuccessModal');
+        showModal('successModal');
         setUploadPictureModalDefault();
       },
       () => {
-        showModal('ErrorModal');
+        showModal('errorModal');
         setUploadPictureModalDefault();
       },
       new FormData(evt.target),

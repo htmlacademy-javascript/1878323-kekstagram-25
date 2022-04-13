@@ -36,10 +36,10 @@ const shuffleArray = (array) => {
  */
 const isEscapeKey = (evt) => (evt.key === ('Escape' || 'Esc'));
 
-/**
- * Проверка, что произведен клик левой клавишей мыши по объекту.
- */
-const isMouseClick = (evt) => (evt.type === 'click');
+// /**
+//  * Проверка, что произведен клик левой клавишей мыши по объекту.
+//  */
+// const isMouseClick = (evt) => (evt.type === 'click');
 
 /**
  * Предотвращение "всплытия" события нажатия клавиши "Escape".

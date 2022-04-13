@@ -1,12 +1,12 @@
 import {sendData} from './fetch.js';
 import {isEscapeKey, isMouseClick, toggleClass} from './utils.js';
 import {validatePristine} from './validate.js';
-import {showErrorModal, showSuccessModal} from './modal-messages.js';
+import {showModal} from './modal-messages.js';
 import './picture-effect.js';
 import './picture-scale.js';
 
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];                       // Разрешения изображений, доступные для отправки на сервер
-const DEFAULT_PHOTO_URL = 'img/upload-default-image.jpg';               // Адрес изображения-заглушки для показа до загрузки своей фотографии
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];  // Разрешения изображений, доступные для отправки на сервер
+const DEFAULT_PHOTO_URL = 'img/upload-default-image.jpg';  // Адрес изображения-заглушки для показа до загрузки своей фотографии
 
 const pageBody = document.querySelector('body');
 const pictureUploadForm = document.querySelector('.img-upload__form');
@@ -63,20 +63,16 @@ const setFormSubmitHandler = (evt) => {
     blockSubmitButton();
     sendData(
       () => {
-        showSuccessModal();
+        showModal('SuccessModal');
         setUploadPictureModalDefault();
       },
       () => {
-        showErrorModal();
+        showModal('ErrorModal');
         setUploadPictureModalDefault();
       },
       new FormData(evt.target),
     );
   }
-  // else {
-  //   pictureUploadSubmitButton.disabled = true;
-  //   pictureUploadSubmitButton.textContent = 'блаблабла';
-  // }
 };
 
 /**

@@ -1,10 +1,10 @@
 import {isEscapeKey, isMouseClick, toggleClass} from './utils.js';
 
-const COMMENT_PICTURE_WEIGHT = 35;                                      // Ширина изображения при добавлении
-const COMMENT_PICTURE_HEIGHT = 35;                                      // Высота изображения при добавлении
-const COMMENTS_PORTION = 5;                                             // Количество комментариев, порционно загружаемых на модалке с большой фотографией
+const COMMENT_PICTURE_WEIGHT = 35;  // Ширина изображения при добавлении
+const COMMENT_PICTURE_HEIGHT = 35;  // Высота изображения при добавлении
+const COMMENTS_PORTION = 5;  // Количество комментариев, порционно загружаемых на модалке с большой фотографией
 
-const bodyElement = document.querySelector('body');
+const pageBody = document.querySelector('body');
 const pictureBig = document.querySelector('.big-picture');
 const pictureBigImg = pictureBig.querySelector('.big-picture__img');
 const likesCount = pictureBig.querySelector('.likes-count');
@@ -62,7 +62,7 @@ const fillPictureBig = (picture) => {
 
 const tooglePictureModal = (isHidden) => {
   toggleClass(pictureBig, 'hidden', !isHidden);
-  toggleClass(bodyElement, 'modal-open', isHidden);
+  toggleClass(pageBody, 'modal-open', isHidden);
   socialComments.innerHTML = '';
 };
 

@@ -9,7 +9,7 @@ const pictureListFragment = document.createDocumentFragment();
  * Создание HTML структуры отображения превью картинок .
  *
  * @param {array} picture - Объект превью фотографии
- * @returns {array} — HTML структура превью фотографии.
+ * @returns {Node} — HTML структура превью фотографии.
  */
 
 const createItemPicture = (picture) => {

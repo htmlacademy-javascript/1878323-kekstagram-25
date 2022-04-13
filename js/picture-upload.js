@@ -9,18 +9,18 @@ const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];  // Разрешения из�
 const DEFAULT_PHOTO_URL = 'img/upload-default-image.jpg';  // Адрес изображения-заглушки для показа до загрузки своей фотографии
 
 const pageBody = document.querySelector('body');
-const pictureUploadForm = document.querySelector('.img-upload__form');
-const pictureUploadSubmitButton = document.querySelector('.img-upload__submit');
-const pictureUploadButton = pictureUploadForm.querySelector('.img-upload__start input[type=file]');
-const pictureUploadModal = pictureUploadForm.querySelector('.img-upload__overlay');
-const pictureUploadPreview = pictureUploadModal.querySelector('.img-upload__preview img');
-const pictureUploadModalCloseButton = pictureUploadModal.querySelector('.img-upload__cancel');
+const uploadForm = document.querySelector('.img-upload__form');
+const uploadSubmitButton = document.querySelector('.img-upload__submit');
+const uploadButton = uploadForm.querySelector('.img-upload__start input[type=file]');
+const uploadModal = uploadForm.querySelector('.img-upload__overlay');
+const uploadPreview = uploadModal.querySelector('.img-upload__preview img');
+const uploadModalCloseButton = uploadModal.querySelector('.img-upload__cancel');
 const scaleControlValue = document.querySelector('.scale__control--value');
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 
 const toogleUploadPictureModal = (isHidden) => {
   toggleClass(pageBody, 'modal-open', isHidden);
-  toggleClass(pictureUploadModal, 'hidden', !isHidden);
+  toggleClass(uploadModal, 'hidden', !isHidden);
 };
 
 /**
@@ -28,8 +28,8 @@ const toogleUploadPictureModal = (isHidden) => {
  * Отображение надписи для уведомления пользователя о процессе отправки.
  */
 const blockSubmitButton = () => {
-  pictureUploadSubmitButton.disabled = true;
-  pictureUploadSubmitButton.textContent = 'Отправляется...';
+  uploadSubmitButton.disabled = true;
+  uploadSubmitButton.textContent = 'Отправляется...';
 };
 
 
@@ -38,8 +38,8 @@ const blockSubmitButton = () => {
  * Как при удачной отправке данных, так и при  неудачной.
  */
 const unblockSubmitButton = () => {
-  pictureUploadSubmitButton.disabled = false;
-  pictureUploadSubmitButton.textContent = 'Опубликовать';
+  uploadSubmitButton.disabled = false;
+  uploadSubmitButton.textContent = 'Опубликовать';
 };
 
 /**
@@ -48,13 +48,13 @@ const unblockSubmitButton = () => {
 const setUploadPictureModalDefault = () => {
   toogleUploadPictureModal(false);
   unblockSubmitButton();
-  pictureUploadForm.reset();
-  pictureUploadButton.value = '';
-  pictureUploadPreview.style = '';
-  pictureUploadPreview.classList = '';
+  uploadForm.reset();
+  uploadButton.value = '';
+  uploadPreview.style = '';
+  uploadPreview.classList = '';
   scaleControlValue.value = '100%';
   scaleControlValue.setAttribute('value', '100%');
-  pictureUploadPreview.style.transform = 'scale(1)';
+  uploadPreview.style.transform = 'scale(1)';
 };
 
 const setFormSubmitHandler = (evt) => {
@@ -80,13 +80,13 @@ const setFormSubmitHandler = (evt) => {
  * При выборе файла с неподходящим разрешением показывается фото-заглушка.
  */
 const uploadPicture = () => {
-  const file = pictureUploadButton.files[0];
+  const file = uploadButton.files[0];
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => (fileName.endsWith(it)));
   if (matches) {
-    pictureUploadPreview.src = URL.createObjectURL(file);
+    uploadPreview.src = URL.createObjectURL(file);
   } else {
-    pictureUploadPreview.src = DEFAULT_PHOTO_URL;
+    uploadPreview.src = DEFAULT_PHOTO_URL;
   }
 };
 
@@ -94,17 +94,27 @@ const uploadPicture = () => {
 /**
  * Закрытие модального окна и очищение полей формы до состояния по-умолчанию.
  */
-const closePictureUploadModal = (evt) => {
+
+function closePictureUploadModal () {
+  toogleUploadPictureModal(false);
+  uploadForm.reset();
+  uploadButton.value = '';
+  document.removeEventListener('keydown', closePictureUploadModal);
+  uploadModalCloseButton.removeEventListener('click', closePictureUploadModal);
+  validatePristine.reset();
+  uploadPreview.style = '';
+  uploadPreview.classList = '';
+}
+
+const documentKeydownHandler = (evt) => {
   if (checkEscapeKey(evt) || checkMouseClick(evt)) {
-    toogleUploadPictureModal(false);
-    pictureUploadForm.reset();
-    // pictureUploadForm.removeEventListener('submit', setFormSubmitHandler);
-    pictureUploadButton.value = '';
-    document.removeEventListener('keydown', closePictureUploadModal);
-    pictureUploadModalCloseButton.removeEventListener('click', closePictureUploadModal);
-    validatePristine.reset();
-    pictureUploadPreview.style = '';
-    pictureUploadPreview.classList = '';
+    closePictureUploadModal();
+  }
+};
+
+const uploadModalCloseButtonKeydownHandler = (evt) => {
+  if (checkEscapeKey(evt) || checkMouseClick(evt)) {
+    closePictureUploadModal();
   }
 };
 
@@ -114,13 +124,13 @@ const closePictureUploadModal = (evt) => {
  */
 const openPictureUploadModal = () => {
   toogleUploadPictureModal(true);
-  document.addEventListener('keydown', closePictureUploadModal);
-  pictureUploadModalCloseButton.addEventListener('click', closePictureUploadModal);
-  pictureUploadForm.addEventListener('submit', setFormSubmitHandler);
+  document.addEventListener('keydown', documentKeydownHandler);
+  uploadModalCloseButton.addEventListener('click', uploadModalCloseButtonKeydownHandler);
+  uploadForm.addEventListener('submit', setFormSubmitHandler);
   scaleControlValue.value = '100%';
-  pictureUploadPreview.style.transform = 'scale(1)';
+  uploadPreview.style.transform = 'scale(1)';
   effectLevelSlider.classList.add('hidden');
 };
 
-pictureUploadButton.addEventListener('change', uploadPicture);
-pictureUploadButton.addEventListener('change', openPictureUploadModal);
+uploadButton.addEventListener('change', uploadPicture);
+uploadButton.addEventListener('change', openPictureUploadModal);

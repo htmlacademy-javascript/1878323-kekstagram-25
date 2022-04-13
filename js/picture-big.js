@@ -1,4 +1,4 @@
-import {checkEscapeKey, toggleClass, checkMouseClick} from './utils.js';
+import {checkEscapeKey, checkMouseClick, toggleClass} from './utils.js';
 
 const COMMENT_PICTURE_WEIGHT = 35;  // Ширина изображения при добавлении
 const COMMENT_PICTURE_HEIGHT = 35;  // Высота изображения при добавлении
@@ -31,7 +31,7 @@ const fillPictureBigComments = (comments) => {
   socialComments.insertAdjacentHTML('beforeend', commentsListPortion);
 };
 
-const  socialCommentsLoaderClickHandler = (evt) => {
+const socialCommentsLoaderClickHandler = (evt) => {
   evt.preventDefault();
   fillPictureBigComments(totalCommentList);
   shownCommentsCount += COMMENTS_PORTION;
@@ -90,7 +90,7 @@ const windowClickHandler = (evt) => {
 };
 
 
-function closePictureModal () {
+function closePictureModal() {
   tooglePictureModal(false);
   window.removeEventListener('keydown', windowKeydownHandler);
   window.removeEventListener('click', windowClickHandler);

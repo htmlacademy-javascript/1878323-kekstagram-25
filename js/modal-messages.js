@@ -12,11 +12,11 @@ const errorModalInner = errorModal.querySelector('.error__inner');
 const errorLoadingModal = document.querySelector('#error-loading').content.querySelector('.error-loading').cloneNode(true);
 const errorLoadingModalInner = errorModal.querySelector('.error-loading__inner');
 
-let activeModalName ='';
+let activeModalName = '';
 
 const documentClickHandler = () => removeModal();
 const documentKeydownHandler = (evt) => {
-  if (checkEscapeKey(evt) ) {
+  if (checkEscapeKey(evt)) {
     removeModal();
   }
 };

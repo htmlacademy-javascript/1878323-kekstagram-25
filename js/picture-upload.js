@@ -95,7 +95,7 @@ const uploadPicture = () => {
  * Закрытие модального окна и очищение полей формы до состояния по-умолчанию.
  */
 
-function closePictureUploadModal () {
+function closePictureUploadModal() {
   toogleUploadPictureModal(false);
   uploadForm.reset();
   uploadButton.value = '';

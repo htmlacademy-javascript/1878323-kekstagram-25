@@ -1,4 +1,4 @@
-import {checkEscapeKey, isMouseClick, toggleClass} from './utils.js';
+import {checkEscapeKey, toggleClass, checkMouseClick} from './utils.js';
 
 const COMMENT_PICTURE_WEIGHT = 35;  // Ширина изображения при добавлении
 const COMMENT_PICTURE_HEIGHT = 35;  // Высота изображения при добавлении
@@ -12,7 +12,7 @@ const commentsCountText = pictureBig.querySelector('.comments-count');
 const socialCaption = pictureBig.querySelector('.social__caption');
 const socialComments = pictureBig.querySelector('.social__comments');
 
-const pictureBigModalCloseButton = document.querySelector('.big-picture__cancel');
+const bigModalCloseButton = document.querySelector('.big-picture__cancel');
 const socialCommentCountNow = document.querySelector('.comments-count-now');
 const socialCommentsLoader = document.querySelector('.social__comments-loader');
 
@@ -31,8 +31,12 @@ const fillPictureBigComments = (comments) => {
   socialComments.insertAdjacentHTML('beforeend', commentsListPortion);
 };
 
-const loadMoreCommentHandler = (evt) => {
+const  socialCommentsLoaderClickHandler = (evt) => {
   evt.preventDefault();
+  getsocialComments();
+};
+
+function getsocialComments () {
   fillPictureBigComments(totalCommentList);
 
   shownCommentsCount += COMMENTS_PORTION;
@@ -41,7 +45,7 @@ const loadMoreCommentHandler = (evt) => {
     socialCommentsLoader.classList.add('hidden');
     socialCommentCountNow.textContent = totalCommentListLength.toString();
   }
-};
+}
 
 const fillPictureBig = (picture) => {
   likesCount.textContent = picture.likes.toString();
@@ -66,26 +70,50 @@ const tooglePictureModal = (isHidden) => {
   socialComments.innerHTML = '';
 };
 
-const closePictureModal = (evt) => {
+const bigModalCloseButtonKeydownHandler = (evt) => {
   evt.preventDefault();
-  if (checkEscapeKey(evt) || isMouseClick(evt)) {
-    tooglePictureModal(false);
-    window.removeEventListener('keydown', closePictureModal);
-    pictureBigModalCloseButton.removeEventListener('keydown', closePictureModal);
-    socialCommentsLoader.removeEventListener('click', loadMoreCommentHandler);
-    shownCommentsCount = 0;
-    socialCommentsLoader.classList.remove('hidden');
+  if (checkEscapeKey(evt) || checkMouseClick(evt)) {
+    closePictureModal();
   }
 };
 
+const windowKeydownHandler = (evt) => {
+  evt.preventDefault();
+  if (checkEscapeKey(evt) || checkMouseClick(evt)) {
+    closePictureModal();
+  }
+};
+
+const bigModalCloseButtonClickHandler = (evt) => {
+  evt.preventDefault();
+  closePictureModal();
+};
+
+const windowClickHandler = (evt) => {
+  evt.preventDefault();
+  closePictureModal();
+};
+
+
+function closePictureModal () {
+  tooglePictureModal(false);
+  window.removeEventListener('keydown', windowKeydownHandler);
+  window.removeEventListener('click', windowClickHandler);
+  bigModalCloseButton.removeEventListener('keydown', bigModalCloseButtonClickHandler);
+  bigModalCloseButton.removeEventListener('click', bigModalCloseButtonKeydownHandler);
+  socialCommentsLoader.removeEventListener('click', socialCommentsLoaderClickHandler);
+  shownCommentsCount = 0;
+  socialCommentsLoader.classList.remove('hidden');
+}
+
 const openPictureModal = (picture) => {
-  socialCommentsLoader.addEventListener('click', loadMoreCommentHandler);
+  socialCommentsLoader.addEventListener('click', socialCommentsLoaderClickHandler);
   totalCommentList = picture.comments;
   totalCommentListLength = totalCommentList.length;
   tooglePictureModal(true);
   fillPictureBig(picture);
-  window.addEventListener('keydown', closePictureModal);
-  pictureBigModalCloseButton.addEventListener('click', closePictureModal);
+  window.addEventListener('keydown', windowKeydownHandler);
+  bigModalCloseButton.addEventListener('click', bigModalCloseButtonKeydownHandler);
 };
 
 export {openPictureModal};

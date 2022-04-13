@@ -33,19 +33,14 @@ const fillPictureBigComments = (comments) => {
 
 const  socialCommentsLoaderClickHandler = (evt) => {
   evt.preventDefault();
-  getsocialComments();
-};
-
-function getsocialComments () {
   fillPictureBigComments(totalCommentList);
-
   shownCommentsCount += COMMENTS_PORTION;
   socialCommentCountNow.textContent = shownCommentsCount.toString();
   if (totalCommentListLength <= shownCommentsCount) {
     socialCommentsLoader.classList.add('hidden');
     socialCommentCountNow.textContent = totalCommentListLength.toString();
   }
-}
+};
 
 const fillPictureBig = (picture) => {
   likesCount.textContent = picture.likes.toString();

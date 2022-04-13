@@ -31,7 +31,7 @@ function removeModal() {
   }
   document.removeEventListener('click', documentClickHandler);
   document.removeEventListener('keydown', documentKeydownHandler);
-};
+}
 
 const successModalClickHandler = () => removeModal();
 const successModalButtonClickHandler = () => removeModal();

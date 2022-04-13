@@ -1,6 +1,6 @@
 import {sendData} from './fetch.js';
 import {checkEscapeKey, checkMouseClick, toggleClass} from './utils.js';
-import {validatePristine} from './validate.js';
+import {pristine} from './validate.js';
 import {showModal} from './modal-messages.js';
 import './picture-effect.js';
 import './picture-scale.js';
@@ -59,7 +59,7 @@ const setUploadPictureModalDefault = () => {
 
 const setFormSubmitHandler = (evt) => {
   evt.preventDefault();
-  if (validatePristine.validate()) {
+  if (pristine.validate()) {
     blockSubmitButton();
     sendData(
       () => {
@@ -101,7 +101,7 @@ function closePictureUploadModal () {
   uploadButton.value = '';
   document.removeEventListener('keydown', closePictureUploadModal);
   uploadModalCloseButton.removeEventListener('click', closePictureUploadModal);
-  validatePristine.reset();
+  pristine.reset();
   uploadPreview.style = '';
   uploadPreview.classList = '';
 }

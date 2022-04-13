@@ -32,7 +32,6 @@ const blockSubmitButton = () => {
   uploadSubmitButton.textContent = 'Отправляется...';
 };
 
-
 /**
  * Разблокировка кнопки Submit на время отправки данных на сервер.
  * Как при удачной отправке данных, так и при  неудачной.
@@ -90,22 +89,6 @@ const uploadPicture = () => {
   }
 };
 
-
-/**
- * Закрытие модального окна и очищение полей формы до состояния по-умолчанию.
- */
-
-function closePictureUploadModal() {
-  toogleUploadPictureModal(false);
-  uploadForm.reset();
-  uploadButton.value = '';
-  document.removeEventListener('keydown', closePictureUploadModal);
-  uploadModalCloseButton.removeEventListener('click', closePictureUploadModal);
-  pristine.reset();
-  uploadPreview.style = '';
-  uploadPreview.classList = '';
-}
-
 const documentKeydownHandler = (evt) => {
   if (checkEscapeKey(evt) || checkMouseClick(evt)) {
     closePictureUploadModal();
@@ -117,6 +100,21 @@ const uploadModalCloseButtonKeydownHandler = (evt) => {
     closePictureUploadModal();
   }
 };
+
+/**
+ * Закрытие модального окна и очищение полей формы до состояния по-умолчанию.
+ */
+
+function closePictureUploadModal() {
+  toogleUploadPictureModal(false);
+  uploadForm.reset();
+  uploadButton.value = '';
+  document.removeEventListener('keydown', documentKeydownHandler);
+  uploadModalCloseButton.removeEventListener('click', uploadModalCloseButtonKeydownHandler);
+  pristine.reset();
+  uploadPreview.style = '';
+  uploadPreview.classList = '';
+}
 
 /**
  * Показ модального окна с загрузкой своей фотографии и наложением эффектов.

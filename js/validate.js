@@ -7,8 +7,8 @@ const HASHTAGS_REGEX = /^#[A-Za-zА-Яа-яЕё0-9]{1,19}$/;  // Регуляр�
 const DESCRIPTION_MAX_LENGTH = 140;  // Максимальная длина (в символах) комментария, добавляемого к своей фотографии
 
 const imageUploadForm = document.querySelector('.img-upload__form');
-const hashtagsElement = imageUploadForm.querySelector('.text__hashtags');
-const commentElement = imageUploadForm.querySelector('.text__description');
+const hashtagsText = imageUploadForm.querySelector('.text__hashtags');
+const commentText = imageUploadForm.querySelector('.text__description');
 
 /**
  * Разбиение строки с хэштегами на массив из отдельных хэштегов.
@@ -102,10 +102,10 @@ const pristine = new Pristine(imageUploadForm, {
   errorTextClass: 'text__label--error'
 });
 
-pristine.addValidator(commentElement, validateDescriptionLength, `Максимальная длина комментария - ${DESCRIPTION_MAX_LENGTH} символов`);
-pristine.addValidator(hashtagsElement, getValidateHashStatus, getValidateHashText);
+pristine.addValidator(commentText, validateDescriptionLength, `Максимальная длина комментария - ${DESCRIPTION_MAX_LENGTH} символов`);
+pristine.addValidator(hashtagsText, getValidateHashStatus, getValidateHashText);
 
-hashtagsElement.addEventListener('keydown', stopEscPropagation);
-commentElement.addEventListener('keydown', stopEscPropagation);
+hashtagsText.addEventListener('keydown', stopEscPropagation);
+commentText.addEventListener('keydown', stopEscPropagation);
 
 export {pristine};

@@ -3,7 +3,7 @@ const effectLevelSlider = document.querySelector('.effect-level__slider');
 const effectLevelValue = document.querySelector('.effect-level__value');
 const effectsList = document.querySelector('.effects__list');
 
-const effect = {
+const EFFECT = {
   'effect-none': {
     filter: 'none',
     unit: '',
@@ -112,8 +112,8 @@ const effectsListChangeHandler = (evt) => {
     pictureUploadPreview.style.filter = 'none';
   } else {
     effectLevelSlider.classList.remove('hidden');
-    effectLevelSlider.noUiSlider.updateOptions(effect[evt.target.id].noUiSlider);
-    pictureUploadPreview.classList.add(`effects__preview--${effect[evt.target.id].class}`);
+    effectLevelSlider.noUiSlider.updateOptions(EFFECT[evt.target.id].noUiSlider);
+    pictureUploadPreview.classList.add(`effects__preview--${EFFECT[evt.target.id].class}`);
   }
 };
 
@@ -121,7 +121,7 @@ effectLevelSlider.noUiSlider.on('update', () => {
   const selectedFilter = effectsList.querySelector('input:checked').id;
   const sliderValue = effectLevelSlider.noUiSlider.get();
   effectLevelValue.value = sliderValue;
-  pictureUploadPreview.style.filter = `${effect[selectedFilter].filter}(${sliderValue}${effect[selectedFilter].unit})`;
+  pictureUploadPreview.style.filter = `${EFFECT[selectedFilter].filter}(${sliderValue}${EFFECT[selectedFilter].unit})`;
 });
 
 effectsList.addEventListener('change', effectsListChangeHandler);

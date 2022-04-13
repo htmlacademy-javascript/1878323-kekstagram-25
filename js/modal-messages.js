@@ -1,4 +1,4 @@
-import {isEscapeKey} from './utils.js';
+import {checkEscapeKey} from './utils.js';
 
 const MESSAGE_TIMEOUT = 5000;  // Время показа (в миллисекундах) всплывающего окошка с ошибкой получения изображений с сервера
 
@@ -16,7 +16,7 @@ let activeModalName ='';
 
 const documentClickHandler = () => removeModal();
 const documentKeydownHandler = (evt) => {
-  if (isEscapeKey(evt) ) {
+  if (checkEscapeKey(evt) ) {
     removeModal();
   }
 };

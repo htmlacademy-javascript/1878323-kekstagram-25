@@ -1,5 +1,5 @@
 import {sendData} from './fetch.js';
-import {isEscapeKey, isMouseClick, toggleClass} from './utils.js';
+import {checkEscapeKey, isMouseClick, toggleClass} from './utils.js';
 import {validatePristine} from './validate.js';
 import {showModal} from './modal-messages.js';
 import './picture-effect.js';
@@ -95,7 +95,7 @@ const uploadPicture = () => {
  * Закрытие модального окна и очищение полей формы до состояния по-умолчанию.
  */
 const closePictureUploadModal = (evt) => {
-  if (isEscapeKey(evt) || isMouseClick(evt)) {
+  if (checkEscapeKey(evt) || isMouseClick(evt)) {
     toogleUploadPictureModal(false);
     pictureUploadForm.reset();
     // pictureUploadForm.removeEventListener('submit', setFormSubmitHandler);

@@ -1,4 +1,4 @@
-import {isEscapeKey, isMouseClick, toggleClass} from './utils.js';
+import {checkEscapeKey, isMouseClick, toggleClass} from './utils.js';
 
 const COMMENT_PICTURE_WEIGHT = 35;  // Ширина изображения при добавлении
 const COMMENT_PICTURE_HEIGHT = 35;  // Высота изображения при добавлении
@@ -68,7 +68,7 @@ const tooglePictureModal = (isHidden) => {
 
 const closePictureModal = (evt) => {
   evt.preventDefault();
-  if (isEscapeKey(evt) || isMouseClick(evt)) {
+  if (checkEscapeKey(evt) || isMouseClick(evt)) {
     tooglePictureModal(false);
     window.removeEventListener('keydown', closePictureModal);
     pictureBigModalCloseButton.removeEventListener('keydown', closePictureModal);

@@ -1,7 +1,7 @@
-const SCALE_MIN = 25;                                                   // Минимальный масштаб, доступный при редактировании изображения
-const SCALE_MAX = 100;                                                  // Максимальный масштаб, доступный при редактировании изображения
-const SCALE_STEP = 25;                                                  // Шаг изменения масштаба при редактировании изображения
-const PERCENT_TO_FRACTION = 100;                                        // Число для перевода процентов в доли
+const SCALE_MIN = 25;  // Минимальный масштаб, доступный при редактировании изображения
+const SCALE_MAX = 100;  // Максимальный масштаб, доступный при редактировании изображения
+const SCALE_STEP = 25;  // Шаг изменения масштаба при редактировании изображения
+const PERCENT_TO_FRACTION = 100;  // Число для перевода процентов в доли
 
 const scaleControlValue = document.querySelector('.scale__control--value');
 const pictureUploadPreview = document.querySelector('.img-upload__preview img');

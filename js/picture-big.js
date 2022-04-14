@@ -1,10 +1,10 @@
-import {isEscapeKey, isMouseClick, toggleClass} from './utils.js';
+import {checkEscapeKey, toggleClass} from './utils.js';
 
-const COMMENT_PICTURE_WEIGHT = 35;                                      // Ширина изображения при добавлении
-const COMMENT_PICTURE_HEIGHT = 35;                                      // Высота изображения при добавлении
-const COMMENTS_PORTION = 5;                                             // Количество комментариев, порционно загружаемых на модалке с большой фотографией
+const COMMENT_PICTURE_WEIGHT = 35;  // Ширина изображения при добавлении
+const COMMENT_PICTURE_HEIGHT = 35;  // Высота изображения при добавлении
+const COMMENTS_PORTION = 5;  // Количество комментариев, порционно загружаемых на модалке с большой фотографией
 
-const bodyElement = document.querySelector('body');
+const pageBody = document.querySelector('body');
 const pictureBig = document.querySelector('.big-picture');
 const pictureBigImg = pictureBig.querySelector('.big-picture__img');
 const likesCount = pictureBig.querySelector('.likes-count');
@@ -12,7 +12,7 @@ const commentsCountText = pictureBig.querySelector('.comments-count');
 const socialCaption = pictureBig.querySelector('.social__caption');
 const socialComments = pictureBig.querySelector('.social__comments');
 
-const pictureBigModalCloseButton = document.querySelector('.big-picture__cancel');
+const bigModalCloseButton = document.querySelector('.big-picture__cancel');
 const socialCommentCountNow = document.querySelector('.comments-count-now');
 const socialCommentsLoader = document.querySelector('.social__comments-loader');
 
@@ -31,10 +31,9 @@ const fillPictureBigComments = (comments) => {
   socialComments.insertAdjacentHTML('beforeend', commentsListPortion);
 };
 
-const loadMoreCommentHandler = (evt) => {
+const socialCommentsLoaderClickHandler = (evt) => {
   evt.preventDefault();
   fillPictureBigComments(totalCommentList);
-
   shownCommentsCount += COMMENTS_PORTION;
   socialCommentCountNow.textContent = shownCommentsCount.toString();
   if (totalCommentListLength <= shownCommentsCount) {
@@ -62,30 +61,46 @@ const fillPictureBig = (picture) => {
 
 const tooglePictureModal = (isHidden) => {
   toggleClass(pictureBig, 'hidden', !isHidden);
-  toggleClass(bodyElement, 'modal-open', isHidden);
+  toggleClass(pageBody, 'modal-open', isHidden);
   socialComments.innerHTML = '';
 };
 
-const closePictureModal = (evt) => {
+const documentKeydownHandler = (evt) => {
   evt.preventDefault();
-  if (isEscapeKey(evt) || isMouseClick(evt)) {
-    tooglePictureModal(false);
-    window.removeEventListener('keydown', closePictureModal);
-    pictureBigModalCloseButton.removeEventListener('keydown', closePictureModal);
-    socialCommentsLoader.removeEventListener('click', loadMoreCommentHandler);
-    shownCommentsCount = 0;
-    socialCommentsLoader.classList.remove('hidden');
+  if (checkEscapeKey(evt)) {
+    closePictureModal();
   }
 };
 
+const bigModalCloseButtonClickHandler = (evt) => {
+  evt.preventDefault();
+  closePictureModal();
+};
+
+const documentClickHandler = (evt) => {
+  evt.preventDefault();
+  closePictureModal();
+};
+
+
+function closePictureModal() {
+  tooglePictureModal(false);
+  document.removeEventListener('keydown', documentKeydownHandler);
+  document.removeEventListener('click', documentClickHandler);
+  bigModalCloseButton.removeEventListener('click', bigModalCloseButtonClickHandler);
+  socialCommentsLoader.removeEventListener('click', socialCommentsLoaderClickHandler);
+  shownCommentsCount = 0;
+  socialCommentsLoader.classList.remove('hidden');
+}
+
 const openPictureModal = (picture) => {
-  socialCommentsLoader.addEventListener('click', loadMoreCommentHandler);
+  socialCommentsLoader.addEventListener('click', socialCommentsLoaderClickHandler);
   totalCommentList = picture.comments;
   totalCommentListLength = totalCommentList.length;
   tooglePictureModal(true);
   fillPictureBig(picture);
-  window.addEventListener('keydown', closePictureModal);
-  pictureBigModalCloseButton.addEventListener('click', closePictureModal);
+  document.addEventListener('keydown', documentKeydownHandler);
+  bigModalCloseButton.addEventListener('click', bigModalCloseButtonClickHandler);
 };
 
 export {openPictureModal};

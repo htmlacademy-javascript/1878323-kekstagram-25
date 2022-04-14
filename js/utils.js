@@ -34,18 +34,13 @@ const shuffleArray = (array) => {
 /**
  * Проверка, что нажата клавиша "Escape".
  */
-const isEscapeKey = (evt) => (evt.key === ('Escape' || 'Esc'));
-
-/**
- * Проверка, что произведен клик левой клавишей мыши по объекту.
- */
-const isMouseClick = (evt) => (evt.type === 'click');
+const checkEscapeKey = (evt) => (evt.key === ('Escape' || 'Esc'));
 
 /**
  * Предотвращение "всплытия" события нажатия клавиши "Escape".
  */
 const stopEscPropagation = (evt) => {
-  if (isEscapeKey(evt)) {
+  if (checkEscapeKey(evt)) {
     evt.stopPropagation();
   }
 };
@@ -62,8 +57,7 @@ const toggleClass = (element, className, isHidden) => element.classList.toggle(c
 export {
   debounce,
   shuffleArray,
-  isEscapeKey,
-  isMouseClick,
+  checkEscapeKey,
   stopEscPropagation,
   toggleClass
 };

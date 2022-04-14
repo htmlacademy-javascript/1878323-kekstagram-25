@@ -92,7 +92,7 @@ const documentKeydownHandler = (evt) => {
 };
 
 const uploadModalCloseButtonClickHandler = () => {
-      closePictureUploadModal();
+  closePictureUploadModal();
 };
 
 /**

@@ -82,21 +82,17 @@ const uploadPicture = () => {
   const file = uploadButton.files[0];
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => (fileName.endsWith(it)));
-  if (matches) {
-    uploadPreview.src = URL.createObjectURL(file);
-  } else {
-    uploadPreview.src = DEFAULT_PHOTO_URL;
-  }
+  uploadPreview.src = matches ? URL.createObjectURL(file) : DEFAULT_PHOTO_URL;
 };
 
 const documentKeydownHandler = (evt) => {
-  if (checkEscapeKey(evt) || checkMouseClick(evt)) {
+  if (checkEscapeKey(evt)) {
     closePictureUploadModal();
   }
 };
 
-const uploadModalCloseButtonKeydownHandler = (evt) => {
-  if (checkEscapeKey(evt) || checkMouseClick(evt)) {
+const uploadModalCloseButtonClickHandler = (evt) => {
+  if (checkMouseClick(evt)) {
     closePictureUploadModal();
   }
 };
@@ -110,7 +106,7 @@ function closePictureUploadModal() {
   uploadForm.reset();
   uploadButton.value = '';
   document.removeEventListener('keydown', documentKeydownHandler);
-  uploadModalCloseButton.removeEventListener('click', uploadModalCloseButtonKeydownHandler);
+  uploadModalCloseButton.removeEventListener('click', uploadModalCloseButtonClickHandler);
   pristine.reset();
   uploadPreview.style = '';
   uploadPreview.classList = '';
@@ -123,7 +119,7 @@ function closePictureUploadModal() {
 const openPictureUploadModal = () => {
   toogleUploadPictureModal(true);
   document.addEventListener('keydown', documentKeydownHandler);
-  uploadModalCloseButton.addEventListener('click', uploadModalCloseButtonKeydownHandler);
+  uploadModalCloseButton.addEventListener('click', uploadModalCloseButtonClickHandler);
   uploadForm.addEventListener('submit', setFormSubmitHandler);
   scaleControlValue.value = '100%';
   uploadPreview.style.transform = 'scale(1)';

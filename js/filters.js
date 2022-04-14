@@ -1,9 +1,9 @@
 import {debounce, shuffleArray} from './utils.js';
 import {renderPictureList} from './picture.js';
 
-const pictureFilter = document.querySelector('.img-filters');
-
 const RANDOM_PHOTOS_COUNT = 10;  // Количество изображений, отображаемых на странице при показе случайных фотографий
+
+const pictureFilter = document.querySelector('.img-filters');
 
 pictureFilter.classList.remove('img-filters--inactive');
 

@@ -21,16 +21,33 @@ const documentKeydownHandler = (evt) => {
   }
 };
 
+const closeErrorLoadingModal = () => {
+  errorLoadingModal.remove();
+};
+
+const closeSuccessModal = () => {
+  successModal.remove();
+};
+
+const closeErrorModal = () => {
+  errorModal.remove();
+};
+
 function removeModal() {
-  if (activeModalName === 'errorLoadingModal') {
-    errorLoadingModal.remove();
-  } else if (activeModalName === 'successModal') {
-    successModal.remove();
-  } else if (activeModalName === 'errorModal') {
-    errorModal.remove();
-  }
   document.removeEventListener('click', documentClickHandler);
   document.removeEventListener('keydown', documentKeydownHandler);
+
+  switch (activeModalName) {
+    case 'errorLoadingModal':
+      closeErrorLoadingModal();
+      break;
+    case 'successModal':
+      closeSuccessModal();
+      break;
+    case 'errorModal':
+      closeErrorModal();
+      break;
+  }
 }
 
 const successModalClickHandler = () => removeModal();
@@ -39,34 +56,50 @@ const errorModalClickHandler = () => removeModal();
 const errorModalButtonClickHandler = () => removeModal();
 const errorLoadingModalClickHandler = () => removeModal();
 
+const showErrorLoadingModal = () => {
+  pageBody.append(errorLoadingModal);
+  errorLoadingModal.addEventListener('click', errorLoadingModalClickHandler);
+  errorLoadingModalInner.addEventListener('click', (evt) => {
+    evt.stopPropagation();
+  });
+  setTimeout(() => {
+    removeModal();
+  }, MESSAGE_TIMEOUT);
+};
+
+const showSuccessModal = () => {
+  pageBody.append(successModal);
+  successModal.addEventListener('click', successModalClickHandler);
+  successModalInner.addEventListener('click', (evt) => {
+    evt.stopPropagation();
+  });
+  successModalButton.addEventListener('click', successModalButtonClickHandler);
+};
+
+const showErrorModal = () => {
+  pageBody.append(errorModal);
+  errorModal.addEventListener('click', errorModalClickHandler);
+  errorModalInner.addEventListener('click', (evt) => {
+    evt.stopPropagation();
+  });
+  errorModalButton.addEventListener('click', errorModalButtonClickHandler);
+};
+
 const showModal = (modalName) => {
   document.addEventListener('click', documentClickHandler);
   document.addEventListener('keydown', documentKeydownHandler);
   activeModalName = modalName;
 
-  if (modalName === 'errorLoadingModal') {
-    pageBody.append(errorLoadingModal);
-    errorLoadingModal.addEventListener('click', errorLoadingModalClickHandler);
-    errorLoadingModalInner.addEventListener('click', (evt) => {
-      evt.stopPropagation();
-    });
-    setTimeout(() => {
-      removeModal();
-    }, MESSAGE_TIMEOUT);
-  } else if (modalName === 'successModal') {
-    pageBody.append(successModal);
-    successModal.addEventListener('click', successModalClickHandler);
-    successModalInner.addEventListener('click', (evt) => {
-      evt.stopPropagation();
-    });
-    successModalButton.addEventListener('click', successModalButtonClickHandler);
-  } else if (modalName === 'errorModal') {
-    pageBody.append(errorModal);
-    errorModal.addEventListener('click', errorModalClickHandler);
-    errorModalInner.addEventListener('click', (evt) => {
-      evt.stopPropagation();
-    });
-    errorModalButton.addEventListener('click', errorModalButtonClickHandler);
+  switch (modalName) {
+    case 'errorLoadingModal':
+      showErrorLoadingModal();
+      break;
+    case 'successModal':
+      showSuccessModal();
+      break;
+    case 'errorModal':
+      showErrorModal();
+      break;
   }
 };
 

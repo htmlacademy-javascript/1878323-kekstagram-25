@@ -65,14 +65,7 @@ const tooglePictureModal = (isHidden) => {
   socialComments.innerHTML = '';
 };
 
-const bigModalCloseButtonKeydownHandler = (evt) => {
-  evt.preventDefault();
-  if (checkEscapeKey(evt) || checkMouseClick(evt)) {
-    closePictureModal();
-  }
-};
-
-const windowKeydownHandler = (evt) => {
+const documentKeydownHandler = (evt) => {
   evt.preventDefault();
   if (checkEscapeKey(evt) || checkMouseClick(evt)) {
     closePictureModal();
@@ -84,7 +77,7 @@ const bigModalCloseButtonClickHandler = (evt) => {
   closePictureModal();
 };
 
-const windowClickHandler = (evt) => {
+const documentClickHandler = (evt) => {
   evt.preventDefault();
   closePictureModal();
 };
@@ -92,10 +85,9 @@ const windowClickHandler = (evt) => {
 
 function closePictureModal() {
   tooglePictureModal(false);
-  window.removeEventListener('keydown', windowKeydownHandler);
-  window.removeEventListener('click', windowClickHandler);
-  bigModalCloseButton.removeEventListener('keydown', bigModalCloseButtonClickHandler);
-  bigModalCloseButton.removeEventListener('click', bigModalCloseButtonKeydownHandler);
+  document.removeEventListener('keydown', documentKeydownHandler);
+  document.removeEventListener('click', documentClickHandler);
+  bigModalCloseButton.removeEventListener('click', bigModalCloseButtonClickHandler);
   socialCommentsLoader.removeEventListener('click', socialCommentsLoaderClickHandler);
   shownCommentsCount = 0;
   socialCommentsLoader.classList.remove('hidden');
@@ -107,8 +99,8 @@ const openPictureModal = (picture) => {
   totalCommentListLength = totalCommentList.length;
   tooglePictureModal(true);
   fillPictureBig(picture);
-  window.addEventListener('keydown', windowKeydownHandler);
-  bigModalCloseButton.addEventListener('click', bigModalCloseButtonKeydownHandler);
+  document.addEventListener('keydown', documentKeydownHandler);
+  bigModalCloseButton.addEventListener('click', bigModalCloseButtonClickHandler);
 };
 
 export {openPictureModal};

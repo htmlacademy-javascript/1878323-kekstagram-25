@@ -1,5 +1,5 @@
 import {sendData} from './fetch.js';
-import {checkEscapeKey, checkMouseClick, toggleClass} from './utils.js';
+import {checkEscapeKey, toggleClass} from './utils.js';
 import {pristine} from './validate.js';
 import {showModal} from './modal-messages.js';
 import './picture-effect.js';
@@ -91,10 +91,8 @@ const documentKeydownHandler = (evt) => {
   }
 };
 
-const uploadModalCloseButtonClickHandler = (evt) => {
-  if (checkMouseClick(evt)) {
-    closePictureUploadModal();
-  }
+const uploadModalCloseButtonClickHandler = () => {
+      closePictureUploadModal();
 };
 
 /**

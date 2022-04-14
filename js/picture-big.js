@@ -1,4 +1,4 @@
-import {checkEscapeKey, checkMouseClick, toggleClass} from './utils.js';
+import {checkEscapeKey, toggleClass} from './utils.js';
 
 const COMMENT_PICTURE_WEIGHT = 35;  // Ширина изображения при добавлении
 const COMMENT_PICTURE_HEIGHT = 35;  // Высота изображения при добавлении
@@ -67,7 +67,7 @@ const tooglePictureModal = (isHidden) => {
 
 const documentKeydownHandler = (evt) => {
   evt.preventDefault();
-  if (checkEscapeKey(evt) || checkMouseClick(evt)) {
+  if (checkEscapeKey(evt)) {
     closePictureModal();
   }
 };

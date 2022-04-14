@@ -37,11 +37,6 @@ const shuffleArray = (array) => {
 const checkEscapeKey = (evt) => (evt.key === ('Escape' || 'Esc'));
 
 /**
- * Проверка, что произведен клик левой клавишей мыши по объекту.
- */
-const checkMouseClick = (evt) => (evt.type === 'click');
-
-/**
  * Предотвращение "всплытия" события нажатия клавиши "Escape".
  */
 const stopEscPropagation = (evt) => {
@@ -63,7 +58,6 @@ export {
   debounce,
   shuffleArray,
   checkEscapeKey,
-  checkMouseClick,
   stopEscPropagation,
   toggleClass
 };
